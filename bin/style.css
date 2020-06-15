@@ -1,0 +1,21 @@
+#J-loading {
+  position: relative;
+  z-index: 1;
+  width: 100%;
+  height: 100%;
+  width: 100vw;
+  height: 100vh;
+  background: #fff;
+  opacity: 1;
+  transition: opacity 1s;
+}
+.percent {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  font-size: 50px;
+}
+#J-loading.hide {
+  opacity: 0;
+}
