@@ -4,12 +4,12 @@ import Dialog=Laya.Dialog;
 import Scene=Laya.Scene;
 var REG: Function = Laya.ClassUtils.regClass;
 export module ui {
-    export class Hall extends Laya.Scene {
+    export class HallUI extends Laya.Scene {
         constructor(){ super()}
         createChildren():void {
             super.createChildren();
             this.loadScene("Hall");
         }
     }
-    REG("ui.Hall", Hall);
-}
+    REG("ui.HallUI",HallUI);
+}
