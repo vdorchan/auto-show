@@ -46,7 +46,7 @@ export default class GameUI extends Laya.Scene {
   }
 
   preloadRes() {
-    var resource = ['res/LayaScene_0615_01/Conventional/3.ls', ...panCarConfig[0].list]
+    var resource = ['res/LayaScene_0617_03/Conventional/3.ls', ...panCarConfig[0].list]
     Laya.loader.create(resource, Laya.Handler.create(this, this.onPreLoadFinish), Laya.Handler.create(this, this.onProgress))
   }
 
@@ -62,7 +62,7 @@ export default class GameUI extends Laya.Scene {
     }, 500)
 
     // 主场景
-    this._scene = Laya.stage.addChild(Laya.Loader.getRes('res/LayaScene_0615_01/Conventional/3.ls')) as Laya.Scene3D
+    this._scene = Laya.stage.addChild(Laya.Loader.getRes('res/LayaScene_0617_03/Conventional/3.ls')) as Laya.Scene3D
     Laya.stage.setChildIndex(this._scene, 0)
 
     this.car = this._scene.getChildByName('car') as Laya.MeshSprite3D
@@ -78,7 +78,7 @@ export default class GameUI extends Laya.Scene {
   }
 
   createCamera() {
-    this.camera = this._scene.getChildByName('Main Camera') as Laya.Camera
+    this.camera = this._scene.getChildByName('Main Camera') as Laya.Camera
     this.cameraRotate = this.camera.addComponent(CameraRotate)
 
     // this.camera.clearFlag = Laya.BaseCamera.CLEARFLAG_SKY

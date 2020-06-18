@@ -231,7 +231,7 @@
       onEnable() {
       }
       preloadRes() {
-          var resource = ['res/LayaScene_0615_01/Conventional/3.ls', ...panCarConfig[0].list];
+          var resource = ['res/LayaScene_0617_03/Conventional/3.ls', ...panCarConfig[0].list];
           Laya.loader.create(resource, Laya.Handler.create(this, this.onPreLoadFinish), Laya.Handler.create(this, this.onProgress));
       }
       onProgress(p) {
@@ -243,7 +243,7 @@
           setTimeout(() => {
               this.$loading.parentNode.removeChild(this.$loading);
           }, 500);
-          this._scene = Laya.stage.addChild(Laya.Loader.getRes('res/LayaScene_0615_01/Conventional/3.ls'));
+          this._scene = Laya.stage.addChild(Laya.Loader.getRes('res/LayaScene_0617_03/Conventional/3.ls'));
           Laya.stage.setChildIndex(this._scene, 0);
           this.car = this._scene.getChildByName('car');
           this.spinCar = this.car.addComponent(SpinCar);
@@ -254,7 +254,7 @@
           });
       }
       createCamera() {
-          this.camera = this._scene.getChildByName('Main Camera');
+          this.camera = this._scene.getChildByName('Main Camera');
           this.cameraRotate = this.camera.addComponent(CameraRotate);
       }
       createCharacter() {
