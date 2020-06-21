@@ -51,15 +51,15 @@ export default class GameUI extends Laya.Scene {
   }
 
   onProgress(p) {
-    this.$percentBar.innerText = Math.floor(p * 100) + '%'
+    if (window.__onProgress) {
+      window.__onProgress(p)
+    }
   }
 
   onPreLoadFinish() {
-    console.log('onPreLoadFinish')
-    this.$loading.classList.add('hide')
-    setTimeout(() => {
-      this.$loading.parentNode.removeChild(this.$loading)
-    }, 500)
+    if (window.__onComplete) {
+      window.__onComplete()
+    }
 
     // 主场景
     this._scene = Laya.stage.addChild(Laya.Loader.getRes('res/LayaScene_0619_02/Conventional/3.ls')) as Laya.Scene3D
