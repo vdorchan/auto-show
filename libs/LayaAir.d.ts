@@ -53157,7 +53157,14 @@ class VSlider_Example {
 }
 
 interface Window {
-	__onProgress?: (p: number) => void
-	__onComplete?: () => void
-	__onActivityCardClick?: () => void
+	__hallSceneConfig: {
+		onProgress?: (p: number) => void
+		onComplete?: () => void
+		onCouponClick?: () => void
+		coupon: {
+			star: number
+			title: string
+			car: string
+		}
+	}
 }

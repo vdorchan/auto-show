@@ -221,11 +221,8 @@
           this.angle = -1;
           this.radians = -1;
           this.speed = 0.04;
-          this.translateW = new Laya.Vector3(0, 0, -0.02);
-          this.translateS = new Laya.Vector3(0, 0, 0.02);
-          this.translateA = new Laya.Vector3(-0.02, 0, 0);
-          this.translateD = new Laya.Vector3(0.02, 0, 0);
           this._outPos = new Laya.Vector4();
+          this.__hallSceneConfig = window.__hallSceneConfig;
           console.log(this);
           this.loadScene('Hall.scene');
           Laya.MouseManager.multiTouchEnabled = false;
@@ -235,11 +232,8 @@
           Laya.stage.screenMode = Laya.Stage.SCREEN_HORIZONTAL;
           this.$loading = document.getElementById('J-loading');
           this.$percentBar = this.$loading.querySelector('.percent-bar');
+          this.coupon = this.scene.getChildByName('coupon');
           this.preloadRes();
-          this.activityCard = this.scene.getChildByName('activityCard');
-          this.activityCard.on(Laya.Event.CLICK, this, () => {
-              window.__onActivityCardClick && window.__onActivityCardClick();
-          });
       }
       onEnable() {
       }
@@ -252,6 +246,30 @@
       show(el) {
           el.style.display = 'block';
           el.classList.remove('hide');
+      }
+      emit(fnName, ...args) {
+          const fn = this.__hallSceneConfig[fnName];
+          fn && fn.apply(this, args);
+      }
+      createCoupon() {
+          try {
+              const coupon = this.__hallSceneConfig.coupon;
+              this.coupon.getChildByName('title').text = coupon.title;
+              this.coupon.getChildByName('car').text = coupon.car;
+              this.drawCouponStars(coupon.star);
+              this.coupon.on(Laya.Event.CLICK, this, () => {
+                  this.emit('onCouponClick');
+              });
+          }
+          catch (error) { }
+      }
+      drawCouponStars(num = 1) {
+          this.couponStars = this.coupon.getChildByName('stars');
+          for (let i = 0; i < 5; i++) {
+              const star = new Laya.Image(`res/images/star${i + 1 <= num ? 2 : 1}.png`);
+              star.pos(i * 20, 0);
+              this.couponStars.addChild(star);
+          }
       }
       preloadRes() {
           var resource = [
@@ -270,21 +288,22 @@
               'res/LayaScene_0619_04_scene01/Conventional/Assets/lipin-Obj3d66-810003-11-365.lm',
               'res/LayaScene_0619_04_scene01/Conventional/Assets/lipin-Obj3d66-810003-12-572.lm',
               'res/LayaScene_0619_04_scene01/Conventional/3.ls',
-              ...panCarConfig[0].list,
+              ...panCarConfig[0].list
           ];
           Laya.loader.create(resource, Laya.Handler.create(this, this.onPreLoadFinish), Laya.Handler.create(this, this.onProgress));
       }
       onProgress(p) {
-          window.__onProgress && window.__onProgress(p);
+          this.emit('onProgress', p);
       }
       onPreLoadFinish() {
-          window.__onComplete && window.__onComplete();
+          this.emit('onComplete');
           this._scene = Laya.stage.addChild(Laya.Loader.getRes('res/LayaScene_0619_04_scene01/Conventional/3.ls'));
           Laya.stage.setChildIndex(this._scene, 0);
           this.car = this._scene.getChildByName('car');
           this.spinCar = this.car.addComponent(SpinCar);
           this.createCamera();
           this.createCharacter();
+          this.createCoupon();
           Laya.timer.frameLoop(1, this, () => {
               this.car.transform.lookAt(this.camera.transform.position, new Laya.Vector3(0, 1, 0));
           });
@@ -313,10 +332,10 @@
           }
           this.camera.viewport.project(this.car.transform.position, this.camera.projectionViewMatrix, this._outPos);
           if (this._outPos.z < 1) {
-              const posX = this._outPos.x - this.activityCard.getBounds().width / 2;
-              const posY = this._outPos.y - this.activityCard.getBounds().height * 3;
-              this.activityCard.pos(posX, posY);
-              this.activityCard.scaleX = this.activityCard.scaleY = (this._outPos.z + 2) / Laya.Browser.window.devicePixelRatio;
+              const posX = this._outPos.x - this.coupon.getBounds().width / 2;
+              const posY = this._outPos.y - this.coupon.getBounds().height * 3;
+              this.coupon.pos(posX, posY);
+              this.coupon.scaleX = this.coupon.scaleY = (this._outPos.z + 2) / Laya.Browser.window.devicePixelRatio;
           }
       }
       createLight() {

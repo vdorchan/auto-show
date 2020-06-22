@@ -1,9 +1,15 @@
-window.__onProgress = onProgress
-window.__onComplete = onComplete
-window.__onActivityCardClick = () => {
-  alert('你点击了优惠券')
+window.__hallSceneConfig = {
+  onProgress: onProgress,
+  onComplete: onComplete,
+  onCouponClick: function () {
+    alert('你点击了优惠券')
+  },
+  coupon: {
+    star: 3,
+    title: '购置税减半至高5000元',
+    car: '宝马xx'
+  }
 }
-
 
 var $loading = document.getElementById('J-loading')
 var $circleProgress = $loading.querySelector('.circle-progress')
