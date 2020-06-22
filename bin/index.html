@@ -1,65 +1,69 @@
 <html>
-  <head>
-    <title>www.layabox.com</title>
-    <meta charset="utf-8" />
-    <meta name="renderer" content="webkit" />
-    <meta name="viewport" content="width=device-width,initial-scale=1.0,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no" />
-    <meta name="apple-mobile-web-app-capable" content="yes" />
-    <meta name="full-screen" content="true" />
-    <meta name="x5-fullscreen" content="true" />
-    <meta name="360-fullscreen" content="true" />
-    <meta name="laya" screenorientation="landscape" />
-    <meta http-equiv="expires" content="0" />
-    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
-    <meta http-equiv="expires" content="0" />
-    <meta http-equiv="Cache-Control" content="no-siteapp" />
-    <link rel="stylesheet" href="./style.css" />
-  </head>
 
-  <body>
-    <div class="loading" id="J-loading">
-      <div class="circle-progress">
-        <div class="circle-bg"></div>
-        <div class="circle-progress-wrapper circle-right">
-          <div class="circle"></div>
-        </div>
-        <div class="circle-progress-wrapper circle-left">
-          <div class="circle"></div>
-        </div>
-        <div class="circle-light"></div>
-        <div class="circle-percent">10%</div>
-        <img src="./res/images/logo.png" alt="" class="logo" />
+<head>
+  <title>www.layabox.com</title>
+  <meta charset="utf-8" />
+  <meta name="renderer" content="webkit" />
+  <meta name="viewport"
+    content="width=device-width,initial-scale=1.0,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="full-screen" content="true" />
+  <meta name="x5-fullscreen" content="true" />
+  <meta name="360-fullscreen" content="true" />
+  <meta name="laya" screenorientation="landscape" />
+  <meta http-equiv="expires" content="0" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+  <meta http-equiv="expires" content="0" />
+  <meta http-equiv="Cache-Control" content="no-siteapp" />
+  <link rel="stylesheet" href="./style.css" />
+</head>
+
+<body>
+  <div class="loading" id="J-loading">
+    <div class="circle-progress">
+      <div class="circle-bg"></div>
+      <div class="circle-progress-wrapper circle-right">
+        <div class="circle"></div>
       </div>
+      <div class="circle-progress-wrapper circle-left">
+        <div class="circle"></div>
+      </div>
+      <div class="circle-light"></div>
+      <div class="circle-percent">0%</div>
+      <img src="./res/images/logo.png" alt="" class="logo" />
     </div>
-    <div class="activity-card">
+  </div>
+  <div class="activity-card-container">
+    <div class="activity-card" id="J-activityCard">
       <div class="activity-card-title">购置税减半至高5000元</div>
       <div class="activity-card-series">
         <span class="activity-card-car">荣威RX5</span>
         <span class="activity-card-stars">
           <img
-            src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABEAAAARCAYAAAFMandsAAAAAXNSR0IArs4c6QAAAh9JREFUOBGVUs1rE1EQn7e7pQ0FTUTswS/walNLPlw9+QFaUpCIoCBYihfTgxf/gYLSux6rB0Hw5qXipb2IN6la04sXSQuaIqhJdxtpsx/ZN755++FmNz34lrfzm9/8Zt682QUQCx/oVbIKvcxNd4ns4MW2qwWkkGa02ck+ze5sUUaIlJV+XD4zY3x3gWyfcl+HmdVSDYEvUiFRY04qty5NIO190/oCdq2UUrI/t8u3APhpqeSgC8WU2CvikFXZK+AXFpYxrl/MOpZpkE/k0Eg2l1t6Z5LviwXYabWb3Y63MLa8zvY6uGD8bjdJ8P/LrelXaMcztbjjWt7zwD8e8uJGxYehwznOE1YU9ijk5G3MasES1xz+NxCkG9m51/URKSD1r8pkExCOBZlbR5bX5TFRD47Fw6DQsAjLWWClMuzaHI9euKHS7glMXFAN4Gs5fzdyAjCIS2oAn94bcu6Xv5FNBWNE9EliXATtD/UnnoUn7I/1xxE5AETTSMZ2ZwtF7LFPKEbE6NG00uiL1bWkjnyGM1dHO93WIiLcSQpQkIwxICvFASbO9+Hlgczhub5OzGvFgsfxlTj9lFSJLvyfMvyk1BNuqop6M/tm7bOv8RUhlnZn6vyhLrd+ikJashMFWC+jZsYOrrzfjielBtvp7j2zbU9zbA6eA297tjohrYNAPMXjBVJ4Q89PN/TxVuNcvpIKCoL4xtnx1oY+OR2P/wUvbd32DCzYWwAAAABJRU5ErkJggg=="/>
+            src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABEAAAARCAYAAAFMandsAAAAAXNSR0IArs4c6QAAAh9JREFUOBGVUs1rE1EQn7e7pQ0FTUTswS/walNLPlw9+QFaUpCIoCBYihfTgxf/gYLSux6rB0Hw5qXipb2IN6la04sXSQuaIqhJdxtpsx/ZN755++FmNz34lrfzm9/8Zt682QUQCx/oVbIKvcxNd4ns4MW2qwWkkGa02ck+ze5sUUaIlJV+XD4zY3x3gWyfcl+HmdVSDYEvUiFRY04qty5NIO190/oCdq2UUrI/t8u3APhpqeSgC8WU2CvikFXZK+AXFpYxrl/MOpZpkE/k0Eg2l1t6Z5LviwXYabWb3Y63MLa8zvY6uGD8bjdJ8P/LrelXaMcztbjjWt7zwD8e8uJGxYehwznOE1YU9ijk5G3MasES1xz+NxCkG9m51/URKSD1r8pkExCOBZlbR5bX5TFRD47Fw6DQsAjLWWClMuzaHI9euKHS7glMXFAN4Gs5fzdyAjCIS2oAn94bcu6Xv5FNBWNE9EliXATtD/UnnoUn7I/1xxE5AETTSMZ2ZwtF7LFPKEbE6NG00uiL1bWkjnyGM1dHO93WIiLcSQpQkIwxICvFASbO9+Hlgczhub5OzGvFgsfxlTj9lFSJLvyfMvyk1BNuqop6M/tm7bOv8RUhlnZn6vyhLrd+ikJashMFWC+jZsYOrrzfjielBtvp7j2zbU9zbA6eA297tjohrYNAPMXjBVJ4Q89PN/TxVuNcvpIKCoL4xtnx1oY+OR2P/wUvbd32DCzYWwAAAABJRU5ErkJggg==" />
           <img
-            src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABEAAAARCAYAAAFMandsAAAAAXNSR0IArs4c6QAAAh9JREFUOBGVUs1rE1EQn7e7pQ0FTUTswS/walNLPlw9+QFaUpCIoCBYihfTgxf/gYLSux6rB0Hw5qXipb2IN6la04sXSQuaIqhJdxtpsx/ZN755++FmNz34lrfzm9/8Zt682QUQCx/oVbIKvcxNd4ns4MW2qwWkkGa02ck+ze5sUUaIlJV+XD4zY3x3gWyfcl+HmdVSDYEvUiFRY04qty5NIO190/oCdq2UUrI/t8u3APhpqeSgC8WU2CvikFXZK+AXFpYxrl/MOpZpkE/k0Eg2l1t6Z5LviwXYabWb3Y63MLa8zvY6uGD8bjdJ8P/LrelXaMcztbjjWt7zwD8e8uJGxYehwznOE1YU9ijk5G3MasES1xz+NxCkG9m51/URKSD1r8pkExCOBZlbR5bX5TFRD47Fw6DQsAjLWWClMuzaHI9euKHS7glMXFAN4Gs5fzdyAjCIS2oAn94bcu6Xv5FNBWNE9EliXATtD/UnnoUn7I/1xxE5AETTSMZ2ZwtF7LFPKEbE6NG00uiL1bWkjnyGM1dHO93WIiLcSQpQkIwxICvFASbO9+Hlgczhub5OzGvFgsfxlTj9lFSJLvyfMvyk1BNuqop6M/tm7bOv8RUhlnZn6vyhLrd+ikJashMFWC+jZsYOrrzfjielBtvp7j2zbU9zbA6eA297tjohrYNAPMXjBVJ4Q89PN/TxVuNcvpIKCoL4xtnx1oY+OR2P/wUvbd32DCzYWwAAAABJRU5ErkJggg=="/>
+            src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABEAAAARCAYAAAFMandsAAAAAXNSR0IArs4c6QAAAh9JREFUOBGVUs1rE1EQn7e7pQ0FTUTswS/walNLPlw9+QFaUpCIoCBYihfTgxf/gYLSux6rB0Hw5qXipb2IN6la04sXSQuaIqhJdxtpsx/ZN755++FmNz34lrfzm9/8Zt682QUQCx/oVbIKvcxNd4ns4MW2qwWkkGa02ck+ze5sUUaIlJV+XD4zY3x3gWyfcl+HmdVSDYEvUiFRY04qty5NIO190/oCdq2UUrI/t8u3APhpqeSgC8WU2CvikFXZK+AXFpYxrl/MOpZpkE/k0Eg2l1t6Z5LviwXYabWb3Y63MLa8zvY6uGD8bjdJ8P/LrelXaMcztbjjWt7zwD8e8uJGxYehwznOE1YU9ijk5G3MasES1xz+NxCkG9m51/URKSD1r8pkExCOBZlbR5bX5TFRD47Fw6DQsAjLWWClMuzaHI9euKHS7glMXFAN4Gs5fzdyAjCIS2oAn94bcu6Xv5FNBWNE9EliXATtD/UnnoUn7I/1xxE5AETTSMZ2ZwtF7LFPKEbE6NG00uiL1bWkjnyGM1dHO93WIiLcSQpQkIwxICvFASbO9+Hlgczhub5OzGvFgsfxlTj9lFSJLvyfMvyk1BNuqop6M/tm7bOv8RUhlnZn6vyhLrd+ikJashMFWC+jZsYOrrzfjielBtvp7j2zbU9zbA6eA297tjohrYNAPMXjBVJ4Q89PN/TxVuNcvpIKCoL4xtnx1oY+OR2P/wUvbd32DCzYWwAAAABJRU5ErkJggg==" />
           <img
-            src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABEAAAARCAYAAAFMandsAAAAAXNSR0IArs4c6QAAAh9JREFUOBGVUs1rE1EQn7e7pQ0FTUTswS/walNLPlw9+QFaUpCIoCBYihfTgxf/gYLSux6rB0Hw5qXipb2IN6la04sXSQuaIqhJdxtpsx/ZN755++FmNz34lrfzm9/8Zt682QUQCx/oVbIKvcxNd4ns4MW2qwWkkGa02ck+ze5sUUaIlJV+XD4zY3x3gWyfcl+HmdVSDYEvUiFRY04qty5NIO190/oCdq2UUrI/t8u3APhpqeSgC8WU2CvikFXZK+AXFpYxrl/MOpZpkE/k0Eg2l1t6Z5LviwXYabWb3Y63MLa8zvY6uGD8bjdJ8P/LrelXaMcztbjjWt7zwD8e8uJGxYehwznOE1YU9ijk5G3MasES1xz+NxCkG9m51/URKSD1r8pkExCOBZlbR5bX5TFRD47Fw6DQsAjLWWClMuzaHI9euKHS7glMXFAN4Gs5fzdyAjCIS2oAn94bcu6Xv5FNBWNE9EliXATtD/UnnoUn7I/1xxE5AETTSMZ2ZwtF7LFPKEbE6NG00uiL1bWkjnyGM1dHO93WIiLcSQpQkIwxICvFASbO9+Hlgczhub5OzGvFgsfxlTj9lFSJLvyfMvyk1BNuqop6M/tm7bOv8RUhlnZn6vyhLrd+ikJashMFWC+jZsYOrrzfjielBtvp7j2zbU9zbA6eA297tjohrYNAPMXjBVJ4Q89PN/TxVuNcvpIKCoL4xtnx1oY+OR2P/wUvbd32DCzYWwAAAABJRU5ErkJggg=="/>
+            src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABEAAAARCAYAAAFMandsAAAAAXNSR0IArs4c6QAAAh9JREFUOBGVUs1rE1EQn7e7pQ0FTUTswS/walNLPlw9+QFaUpCIoCBYihfTgxf/gYLSux6rB0Hw5qXipb2IN6la04sXSQuaIqhJdxtpsx/ZN755++FmNz34lrfzm9/8Zt682QUQCx/oVbIKvcxNd4ns4MW2qwWkkGa02ck+ze5sUUaIlJV+XD4zY3x3gWyfcl+HmdVSDYEvUiFRY04qty5NIO190/oCdq2UUrI/t8u3APhpqeSgC8WU2CvikFXZK+AXFpYxrl/MOpZpkE/k0Eg2l1t6Z5LviwXYabWb3Y63MLa8zvY6uGD8bjdJ8P/LrelXaMcztbjjWt7zwD8e8uJGxYehwznOE1YU9ijk5G3MasES1xz+NxCkG9m51/URKSD1r8pkExCOBZlbR5bX5TFRD47Fw6DQsAjLWWClMuzaHI9euKHS7glMXFAN4Gs5fzdyAjCIS2oAn94bcu6Xv5FNBWNE9EliXATtD/UnnoUn7I/1xxE5AETTSMZ2ZwtF7LFPKEbE6NG00uiL1bWkjnyGM1dHO93WIiLcSQpQkIwxICvFASbO9+Hlgczhub5OzGvFgsfxlTj9lFSJLvyfMvyk1BNuqop6M/tm7bOv8RUhlnZn6vyhLrd+ikJashMFWC+jZsYOrrzfjielBtvp7j2zbU9zbA6eA297tjohrYNAPMXjBVJ4Q89PN/TxVuNcvpIKCoL4xtnx1oY+OR2P/wUvbd32DCzYWwAAAABJRU5ErkJggg==" />
           <img
-            src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABEAAAARCAYAAAFMandsAAAAAXNSR0IArs4c6QAAAh9JREFUOBGVUs1rE1EQn7e7pQ0FTUTswS/walNLPlw9+QFaUpCIoCBYihfTgxf/gYLSux6rB0Hw5qXipb2IN6la04sXSQuaIqhJdxtpsx/ZN755++FmNz34lrfzm9/8Zt682QUQCx/oVbIKvcxNd4ns4MW2qwWkkGa02ck+ze5sUUaIlJV+XD4zY3x3gWyfcl+HmdVSDYEvUiFRY04qty5NIO190/oCdq2UUrI/t8u3APhpqeSgC8WU2CvikFXZK+AXFpYxrl/MOpZpkE/k0Eg2l1t6Z5LviwXYabWb3Y63MLa8zvY6uGD8bjdJ8P/LrelXaMcztbjjWt7zwD8e8uJGxYehwznOE1YU9ijk5G3MasES1xz+NxCkG9m51/URKSD1r8pkExCOBZlbR5bX5TFRD47Fw6DQsAjLWWClMuzaHI9euKHS7glMXFAN4Gs5fzdyAjCIS2oAn94bcu6Xv5FNBWNE9EliXATtD/UnnoUn7I/1xxE5AETTSMZ2ZwtF7LFPKEbE6NG00uiL1bWkjnyGM1dHO93WIiLcSQpQkIwxICvFASbO9+Hlgczhub5OzGvFgsfxlTj9lFSJLvyfMvyk1BNuqop6M/tm7bOv8RUhlnZn6vyhLrd+ikJashMFWC+jZsYOrrzfjielBtvp7j2zbU9zbA6eA297tjohrYNAPMXjBVJ4Q89PN/TxVuNcvpIKCoL4xtnx1oY+OR2P/wUvbd32DCzYWwAAAABJRU5ErkJggg=="/>
+            src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABEAAAARCAYAAAFMandsAAAAAXNSR0IArs4c6QAAAh9JREFUOBGVUs1rE1EQn7e7pQ0FTUTswS/walNLPlw9+QFaUpCIoCBYihfTgxf/gYLSux6rB0Hw5qXipb2IN6la04sXSQuaIqhJdxtpsx/ZN755++FmNz34lrfzm9/8Zt682QUQCx/oVbIKvcxNd4ns4MW2qwWkkGa02ck+ze5sUUaIlJV+XD4zY3x3gWyfcl+HmdVSDYEvUiFRY04qty5NIO190/oCdq2UUrI/t8u3APhpqeSgC8WU2CvikFXZK+AXFpYxrl/MOpZpkE/k0Eg2l1t6Z5LviwXYabWb3Y63MLa8zvY6uGD8bjdJ8P/LrelXaMcztbjjWt7zwD8e8uJGxYehwznOE1YU9ijk5G3MasES1xz+NxCkG9m51/URKSD1r8pkExCOBZlbR5bX5TFRD47Fw6DQsAjLWWClMuzaHI9euKHS7glMXFAN4Gs5fzdyAjCIS2oAn94bcu6Xv5FNBWNE9EliXATtD/UnnoUn7I/1xxE5AETTSMZ2ZwtF7LFPKEbE6NG00uiL1bWkjnyGM1dHO93WIiLcSQpQkIwxICvFASbO9+Hlgczhub5OzGvFgsfxlTj9lFSJLvyfMvyk1BNuqop6M/tm7bOv8RUhlnZn6vyhLrd+ikJashMFWC+jZsYOrrzfjielBtvp7j2zbU9zbA6eA297tjohrYNAPMXjBVJ4Q89PN/TxVuNcvpIKCoL4xtnx1oY+OR2P/wUvbd32DCzYWwAAAABJRU5ErkJggg==" />
           <img
-            src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABEAAAARCAYAAAFMandsAAAAAXNSR0IArs4c6QAAAgFJREFUOBGVU89rGlEQfs9u2aCXpJde0gZCb4UeUiF/QSkNQhCNCCbFXuz+FYGU3BPwIh4qNDmIIgYRxYNBvAVMb7mFXPRgFdyC+GNV3Hyz9S27/ijJg3FmvvlmfDNvljGcarW6T9pBP61W64r08sPT6bROIanT6WzZOMVi0YgQaFRKJBJHzWaTkbYxVzo8k8l813U9BmEOh0MxmMjXSVam2QLlcnmByXO5XACs98RE7V2oz5AS5/yGMJw7/k8zls1m1/v9vip8p9O54fV6/5JvNEZGu92u93q901AoxEljbHXCn38qlconEmumZHUGg8HPmf9G4NTRiXDQ0THZ6OaHwIxuMM4hgjKNUxyQNL/fv2Z04vP51jRNa4xGIzaTBgWJbN4BgU1LtmkbFQqFgjwej/VwOPyChGzCRAKLRqPfTGdmCMwc+TyB/Fqt9hKTvXe5XO/cbvd4GYcw80mWEVRVPUeDb7GtZ8viAlt5k3w+/xGkmiBCuz0ez63FN01eKpVc2Bxa30MTfaKBd7nEpim2mySTyR3kpyHb/6nzgNhBMBj8LTi2IgSmUqlXeMc/uJlE24B/ow/B4MOeyLL8OhAIdEQB0guD7Xa78eFwKGGgbDKZXEM+kMabM2ASxa0FyLbdJBaL7U2n01+SJB1FIpHiPDkej39BwQt8+l8VRSmI+CMIPu341p4M0wAAAABJRU5ErkJggg=="
-        /></span>
+            src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABEAAAARCAYAAAFMandsAAAAAXNSR0IArs4c6QAAAgFJREFUOBGVU89rGlEQfs9u2aCXpJde0gZCb4UeUiF/QSkNQhCNCCbFXuz+FYGU3BPwIh4qNDmIIgYRxYNBvAVMb7mFXPRgFdyC+GNV3Hyz9S27/ijJg3FmvvlmfDNvljGcarW6T9pBP61W64r08sPT6bROIanT6WzZOMVi0YgQaFRKJBJHzWaTkbYxVzo8k8l813U9BmEOh0MxmMjXSVam2QLlcnmByXO5XACs98RE7V2oz5AS5/yGMJw7/k8zls1m1/v9vip8p9O54fV6/5JvNEZGu92u93q901AoxEljbHXCn38qlconEmumZHUGg8HPmf9G4NTRiXDQ0THZ6OaHwIxuMM4hgjKNUxyQNL/fv2Z04vP51jRNa4xGIzaTBgWJbN4BgU1LtmkbFQqFgjwej/VwOPyChGzCRAKLRqPfTGdmCMwc+TyB/Fqt9hKTvXe5XO/cbvd4GYcw80mWEVRVPUeDb7GtZ8viAlt5k3w+/xGkmiBCuz0ez63FN01eKpVc2Bxa30MTfaKBd7nEpim2mySTyR3kpyHb/6nzgNhBMBj8LTi2IgSmUqlXeMc/uJlE24B/ow/B4MOeyLL8OhAIdEQB0guD7Xa78eFwKGGgbDKZXEM+kMabM2ASxa0FyLbdJBaL7U2n01+SJB1FIpHiPDkej39BwQt8+l8VRSmI+CMIPu341p4M0wAAAABJRU5ErkJggg==" /></span>
       </div>
       <div class="activity-card-deco"></div>
-      <a href="javascript:" class="activity-card-button">立即参与</a>
+      <a href="javascript:alert('你点击了优惠券')" class="activity-card-button">立即参与</a>
     </div>
-    <script type="text/javascript">
-      function loadLib(url) {
-        var script = document.createElement('script')
-        script.async = false
-        script.src = url
-        document.body.appendChild(script)
-      }
-    </script>
-    <script src="./loading.js"></script>
-    <script type="text/javascript" src="index.js"></script>
-  </body>
+  </div>
+  <script type="text/javascript">
+    function loadLib(url) {
+      var script = document.createElement('script')
+      script.async = false
+      script.src = url
+      document.body.appendChild(script)
+    }
+  </script>
+  <script src="./main.js"></script>
+  <script type="text/javascript" src="index.js"></script>
+</body>
+
 </html>

@@ -10,7 +10,7 @@ export default class SpinCar extends Laya.Script3D {
   public panoCars: { color: string; list: string[] }[]
   public colorIdx: number = 0
   public colorItemList: laya.display.cmd.DrawCircleCmd[] = []
-  public circleRadius: number = 25
+  public circleRadius: number = 40
   public hasLoadColorIdx: number[] = [0]
 
   private colorPickItemPadding: number = 10

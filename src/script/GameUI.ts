@@ -26,9 +26,14 @@ export default class GameUI extends Laya.Scene {
 
   $loading: any
   $percentBar: any
+  $activityCard: any
+
+  private _outPos = new Laya.Vector4()
 
   constructor() {
     super()
+
+    console.log(this)
 
     this.loadScene('Hall.scene')
     Config.isAntialias = true
@@ -38,6 +43,8 @@ export default class GameUI extends Laya.Scene {
 
     this.$loading = document.getElementById('J-loading')
     this.$percentBar = this.$loading.querySelector('.percent-bar')
+    this.$activityCard = document.getElementById('J-activityCard')
+    // this.$activityCard.parentNode.classList.add('horizontal')
     this.preloadRes()
   }
 
@@ -45,12 +52,25 @@ export default class GameUI extends Laya.Scene {
     // this.controller = this.getComponent(Controller)
   }
 
+  hide(el) {
+    el.classList.add('hide')
+    setTimeout(() => {
+      el.style.display = 'none'
+    }, 1000);
+  }
+
+  show(el) {
+    el.style.display = 'block'
+    el.classList.remove('hide')
+  }
+
   preloadRes() {
-    var resource = ['res/LayaScene_0619_02/Conventional/3.ls', ...panCarConfig[0].list]
+    var resource = [...panCarConfig[0].list, 'res/LayaScene_0619_04_scene01/Conventional/3.ls']
     Laya.loader.create(resource, Laya.Handler.create(this, this.onPreLoadFinish), Laya.Handler.create(this, this.onProgress))
   }
 
   onProgress(p) {
+    console.log({p})
     if (window.__onProgress) {
       window.__onProgress(p)
     }
@@ -62,7 +82,7 @@ export default class GameUI extends Laya.Scene {
     }
 
     // 主场景
-    this._scene = Laya.stage.addChild(Laya.Loader.getRes('res/LayaScene_0619_02/Conventional/3.ls')) as Laya.Scene3D
+    this._scene = Laya.stage.addChild(Laya.Loader.getRes('res/LayaScene_0619_04_scene01/Conventional/3.ls')) as Laya.Scene3D
     Laya.stage.setChildIndex(this._scene, 0)
 
     this.car = this._scene.getChildByName('car') as Laya.MeshSprite3D
@@ -109,6 +129,16 @@ export default class GameUI extends Laya.Scene {
       Laya.KeyBoardManager.hasKeyDown(68) && this.camera.transform.translate(this.translateD) //D
       // Laya.KeyBoardManager.hasKeyDown(69) && character.jump(); //E
     }
+
+    this.camera.viewport.project(this.car.transform.position, this.camera.projectionViewMatrix, this._outPos)
+    const posX = this._outPos.x / 2
+    const posY = this._outPos.y / 2
+    if (posY < 100) {
+      this.hide(this.$activityCard)
+    } else {
+      this.show(this.$activityCard)
+    }
+    this.$activityCard.style.transform = `translate(${posX}px, ${posY}px)`
   }
 
   createLight() {

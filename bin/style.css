@@ -1,3 +1,8 @@
+html,
+body {
+  margin: 0;
+}
+
 .loading {
   position: absolute;
   width: 100%;
@@ -139,13 +144,31 @@
 }
 
 .activity-card {
-  position: absolute;
+  position: fixed;
   display: flex;
   flex-direction: column;
   justify-content: center;
   width: 405px;
   height: 99px;
   background: url(./res/images/activity-bg.png);
+  z-index: 1;
+  opacity: 1;
+  transition: opacity 1s linear;
+  margin: -250px -200px;
+  /* margin: 0 -300px; */
+}
+.activity-card.hide {
+  opacity: 0;
+}
+
+.activity-card-container.horizontal {
+  position: absolute;
+  left: 0px;
+  top: 0px;
+  width: 100%;
+  height: 100%;
+  transform: rotate(90deg) scale(0.5);
+  pointer-events: none;
   z-index: 1;
 }
 
@@ -195,4 +218,5 @@
   text-align: center;
   text-decoration: none;
   color: #ffffff;
+  pointer-events: all;
 }
