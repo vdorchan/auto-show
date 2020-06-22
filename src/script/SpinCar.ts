@@ -128,7 +128,6 @@ export default class SpinCar extends Laya.Script3D {
       this.spinIdx %= this.carUrls.length
     }
 
-    console.log('car spin', this.spinIdx)
     this.setTexture()
   }
 
@@ -137,7 +136,6 @@ export default class SpinCar extends Laya.Script3D {
   onMouseDown() {
     this.isMouseDown = true
     this.startX = Laya.stage.mouseX
-    console.log('car mousedown')
   }
 
   handleMouseUp() {

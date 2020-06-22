@@ -18,6 +18,8 @@ export default class CameraRotate extends Laya.Script3D {
 
     public controller: Controller
 
+    private _touchId
+
     constructor() {
         super();
     }
@@ -37,7 +39,6 @@ export default class CameraRotate extends Laya.Script3D {
      * @inheritDoc
      */
     public  onAwake():void {
-        console.log('onAwake', Laya.Event)
         this.camera = this.owner as Laya.Camera;
         Laya.stage.on(Laya.Event.MOUSE_DOWN, this, this.mouseDown);
         Laya.stage.on(Laya.Event.MOUSE_UP, this, this.mouseUp);
@@ -72,8 +73,13 @@ export default class CameraRotate extends Laya.Script3D {
         Laya.stage.off(Laya.Event.RIGHT_MOUSE_UP, this, this.mouseUp);
     }
     
-    protected  mouseDown(e:Event):void {
-        console.log('mouseDown', Laya.stage)
+    protected  mouseDown(e:Laya.Event):void {
+        if (this._touchId) {
+            this.isMouseDown = false;
+            this._touchId = null;
+            return
+        }
+        this._touchId = e.touchId
         this.camera.transform.localRotation.getYawPitchRoll(this.yawPitchRoll);
         
         this.lastMouseX = Laya.stage.mouseX;
@@ -81,11 +87,15 @@ export default class CameraRotate extends Laya.Script3D {
         this.isMouseDown = true;
     }
     
-    protected  mouseUp(e:Event):void {
-        this.isMouseDown = false;
+    protected  mouseUp(e:Laya.Event):void {
+        if (this._touchId === e.touchId) {
+            this.isMouseDown = false;
+            this._touchId = null;
+        }
     }
     
     protected  mouseOut(e:Event):void {
         this.isMouseDown = false;
+        this._touchId = null;
     }
 }

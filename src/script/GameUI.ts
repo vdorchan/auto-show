@@ -29,6 +29,7 @@ export default class GameUI extends Laya.Scene {
   $activityCard: any
 
   private _outPos = new Laya.Vector4()
+  private activityCard: Laya.Image
 
   constructor() {
     super()
@@ -36,6 +37,8 @@ export default class GameUI extends Laya.Scene {
     console.log(this)
 
     this.loadScene('Hall.scene')
+
+    Laya.MouseManager.multiTouchEnabled = false
     Config.isAntialias = true
     Laya3D.init(0, 0)
     Laya.stage.scaleMode = Laya.Stage.SCALE_FULL
@@ -43,9 +46,12 @@ export default class GameUI extends Laya.Scene {
 
     this.$loading = document.getElementById('J-loading')
     this.$percentBar = this.$loading.querySelector('.percent-bar')
-    this.$activityCard = document.getElementById('J-activityCard')
-    // this.$activityCard.parentNode.classList.add('horizontal')
     this.preloadRes()
+
+    this.activityCard = this.scene.getChildByName('activityCard')
+    this.activityCard.on(Laya.Event.CLICK, this, () => {
+      window.__onActivityCardClick && window.__onActivityCardClick()
+    })
   }
 
   onEnable() {
@@ -56,7 +62,7 @@ export default class GameUI extends Laya.Scene {
     el.classList.add('hide')
     setTimeout(() => {
       el.style.display = 'none'
-    }, 1000);
+    }, 1000)
   }
 
   show(el) {
@@ -65,21 +71,33 @@ export default class GameUI extends Laya.Scene {
   }
 
   preloadRes() {
-    var resource = [...panCarConfig[0].list, 'res/LayaScene_0619_04_scene01/Conventional/3.ls']
+    var resource = [
+      'res/LayaScene_0619_04_scene01/Conventional/Assets/lipin-Obj3d66-810003-5-510.lm',
+      'res/LayaScene_0619_04_scene01/Conventional/Assets/lipin-Obj3d66-810003-7-647.lm',
+      'res/LayaScene_0619_04_scene01/Conventional/Assets/lipin-Obj3d66-810003-4-160.lm',
+      'res/LayaScene_0619_04_scene01/Conventional/Assets/lipin-Obj3d66-810003-9-923.lm',
+      'res/LayaScene_0619_04_scene01/Conventional/Assets/lipin-Obj3d66-810003-3-54.lm',
+      'res/LayaScene_0619_04_scene01/Conventional/Assets/lipin-Obj3d66-810003-20-205.lm',
+      'res/LayaScene_0619_04_scene01/Conventional/Assets/canary_wharf_2k.png',
+      'res/LayaScene_0619_04_scene01/Conventional/Assets/lipin-Obj3d66-810003-21-992.lm',
+      'res/LayaScene_0619_04_scene01/Conventional/Assets/lipin-Obj3d66-810003-18-821.lm',
+      'res/LayaScene_0619_04_scene01/Conventional/Assets/lipin-Obj3d66-810003-2-694.lm',
+      'res/LayaScene_0619_04_scene01/Conventional/Assets/lipin-Obj3d66-810003-6-1.lm',
+      'res/LayaScene_0619_04_scene01/Conventional/Assets/lipin-Obj3d66-810003-8-584.lm',
+      'res/LayaScene_0619_04_scene01/Conventional/Assets/lipin-Obj3d66-810003-11-365.lm',
+      'res/LayaScene_0619_04_scene01/Conventional/Assets/lipin-Obj3d66-810003-12-572.lm',
+      'res/LayaScene_0619_04_scene01/Conventional/3.ls',
+      ...panCarConfig[0].list,
+    ]
     Laya.loader.create(resource, Laya.Handler.create(this, this.onPreLoadFinish), Laya.Handler.create(this, this.onProgress))
   }
 
   onProgress(p) {
-    console.log({p})
-    if (window.__onProgress) {
-      window.__onProgress(p)
-    }
+    window.__onProgress && window.__onProgress(p)
   }
 
   onPreLoadFinish() {
-    if (window.__onComplete) {
-      window.__onComplete()
-    }
+    window.__onComplete && window.__onComplete()
 
     // 主场景
     this._scene = Laya.stage.addChild(Laya.Loader.getRes('res/LayaScene_0619_04_scene01/Conventional/3.ls')) as Laya.Scene3D
@@ -100,8 +118,6 @@ export default class GameUI extends Laya.Scene {
   createCamera() {
     this.camera = this._scene.getChildByName('Main Camera') as Laya.Camera
     this.cameraRotate = this.camera.addComponent(CameraRotate)
-
-    // this.camera.clearFlag = Laya.BaseCamera.CLEARFLAG_SKY
   }
 
   createCharacter() {
@@ -123,22 +139,20 @@ export default class GameUI extends Laya.Scene {
         this.cameraRotate.startUpdate()
       }
 
-      Laya.KeyBoardManager.hasKeyDown(87) && this.camera.transform.translate(this.translateW) //W
-      Laya.KeyBoardManager.hasKeyDown(83) && this.camera.transform.translate(this.translateS) //S
-      Laya.KeyBoardManager.hasKeyDown(65) && this.camera.transform.translate(this.translateA) //A
-      Laya.KeyBoardManager.hasKeyDown(68) && this.camera.transform.translate(this.translateD) //D
+      // Laya.KeyBoardManager.hasKeyDown(87) && this.camera.transform.translate(this.translateW) //W
+      // Laya.KeyBoardManager.hasKeyDown(83) && this.camera.transform.translate(this.translateS) //S
+      // Laya.KeyBoardManager.hasKeyDown(65) && this.camera.transform.translate(this.translateA) //A
+      // Laya.KeyBoardManager.hasKeyDown(68) && this.camera.transform.translate(this.translateD) //D
       // Laya.KeyBoardManager.hasKeyDown(69) && character.jump(); //E
     }
 
     this.camera.viewport.project(this.car.transform.position, this.camera.projectionViewMatrix, this._outPos)
-    const posX = this._outPos.x / 2
-    const posY = this._outPos.y / 2
-    if (posY < 100) {
-      this.hide(this.$activityCard)
-    } else {
-      this.show(this.$activityCard)
+    if (this._outPos.z < 1) {
+      const posX = this._outPos.x - this.activityCard.getBounds().width / 2
+      const posY = this._outPos.y - this.activityCard.getBounds().height * 3
+      this.activityCard.pos(posX, posY)
+      this.activityCard.scaleX = this.activityCard.scaleY = (this._outPos.z + 2) / Laya.Browser.window.devicePixelRatio
     }
-    this.$activityCard.style.transform = `translate(${posX}px, ${posY}px)`
   }
 
   createLight() {

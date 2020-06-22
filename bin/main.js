@@ -1,3 +1,10 @@
+window.__onProgress = onProgress
+window.__onComplete = onComplete
+window.__onActivityCardClick = () => {
+  alert('你点击了优惠券')
+}
+
+
 var $loading = document.getElementById('J-loading')
 var $circleProgress = $loading.querySelector('.circle-progress')
 var $circleLeft = $circleProgress.querySelector('.circle-left .circle')
@@ -28,5 +35,3 @@ function onComplete() {
   }, 1000);
 }
 
-window.__onProgress = onProgress
-window.__onComplete = onComplete

@@ -154,8 +154,9 @@ body {
   z-index: 1;
   opacity: 1;
   transition: opacity 1s linear;
-  margin: -250px -200px;
+  /* margin: -250px -200px; */
   /* margin: 0 -300px; */
+  margin: -400px -500px;
 }
 .activity-card.hide {
   opacity: 0;

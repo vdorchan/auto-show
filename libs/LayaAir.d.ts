@@ -53157,6 +53157,7 @@ class VSlider_Example {
 }
 
 interface Window {
-	__onProgress: (p: number) => void
-	__onComplete: () => void
+	__onProgress?: (p: number) => void
+	__onComplete?: () => void
+	__onActivityCardClick?: () => void
 }
