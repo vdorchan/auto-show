@@ -1,6 +1,4 @@
 D .
-D 360-car
-R 9B14D89A .DS_Store
 D comp
 P 316AD948 btn_close.png
 P 5B258D17 button.png
@@ -45,10 +43,9 @@ P 01BAE7F5 vslider.png
 D images
 R 391DFF66 bg.jpg
 P A644A2EA button.png
+P 25B0E607 button2.png
 P EEDBE2E3 circle.png
 P 14AD8F36 coupon-bg.png
 P 33B12D9A deco.png
 P EF21BFE1 light.png
 P F54295C7 logo.png
-D 360-car/dee4ef
-R C55B0BE1 .DS_Store

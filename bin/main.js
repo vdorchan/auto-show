@@ -1,8 +1,18 @@
 window.__hallSceneConfig = {
-  onProgress: onProgress,
-  onComplete: onComplete,
-  onCouponClick: function () {
+  /**
+   * 场景初始化回调
+   * @param {function} disableCouponButton 禁用优惠券按钮
+   * @param {function} enableCouponButton 启用优惠券按钮
+   * 
+   */
+  init: function ({ disableCouponButton, enableCouponButton }) {
+
+  },
+  onProgress: onProgress, // loading 进程
+  onComplete: onComplete, // loading 结束
+  onCouponClick: function ({ disableCouponButton }) {
     alert('你点击了优惠券')
+    disableCouponButton()
   },
   coupon: {
     star: 3,
@@ -33,6 +43,8 @@ function onProgress(p) {
   $circlePercent.innerText = Math.floor(p * 100) + '%'
   $circlePercent.style.transform = 'translate3d(' + x + 'px, ' + y + 'px, 0)'
 }
+
+onProgress(0)
 
 function onComplete() {
   $loading.classList.add('hide')

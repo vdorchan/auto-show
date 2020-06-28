@@ -30,6 +30,8 @@ export default class GameUI extends Laya.Scene {
   private _outPos = new Laya.Vector4()
   private coupon: Laya.Image
   private couponStars: Laya.Sprite
+  private couponButton: Laya.Sprite
+  private couponButtonDisabled: Laya.Sprite
 
   private __hallSceneConfig = window.__hallSceneConfig
 
@@ -49,6 +51,8 @@ export default class GameUI extends Laya.Scene {
     this.$loading = document.getElementById('J-loading')
     this.$percentBar = this.$loading.querySelector('.percent-bar')
     this.coupon = this.scene.getChildByName('coupon')
+    this.couponButton = this.coupon.getChildByName('button') as Laya.Sprite
+    this.couponButtonDisabled = this.coupon.getChildByName('buttonDsiabled') as Laya.Sprite
     this.preloadRes()
   }
 
@@ -81,7 +85,10 @@ export default class GameUI extends Laya.Scene {
       ;(this.coupon.getChildByName('car') as Laya.Label).text = coupon.car
       this.drawCouponStars(coupon.star)
       this.coupon.on(Laya.Event.CLICK, this, () => {
-        this.emit('onCouponClick')
+        this.emit('onCouponClick', {
+          disableCouponButton: this.disableCouponButton.bind(this),
+          enableCouponButton: this.enableCouponButton.bind(this),
+        })
       })
     } catch (error) {}
   }
@@ -136,9 +143,24 @@ export default class GameUI extends Laya.Scene {
     this.createCoupon()
     // this.controller.show()
 
+    this.emit('init', {
+      disableCouponButton: this.disableCouponButton.bind(this),
+      enableCouponButton: this.enableCouponButton.bind(this),
+    })
+
     Laya.timer.frameLoop(1, this, () => {
       this.car.transform.lookAt(this.camera.transform.position, new Laya.Vector3(0, 1, 0))
     })
+  }
+
+  disableCouponButton() {
+    this.couponButton.visible = false
+    this.couponButtonDisabled.visible = true
+  }
+
+  enableCouponButton() {
+    this.couponButtonDisabled.visible = false
+    this.couponButton.visible = true
   }
 
   createCamera() {

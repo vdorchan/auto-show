@@ -2,12 +2,12 @@
     "x":0,
     "type":"Scene",
     "selectedBox":63,
-    "selecteID":67,
+    "selecteID":75,
     "searchKey":"Scene",
     "referenceLines":null,
     "props":{"sceneWidth":1136,"sceneHeight":640,"sceneColor":"#000000","scaleX":1,"runtime":"script/GameUI.ts","positionVariance_0":100,"maxPartices":100},
     "nodeParent":-1,
-    "maxID":74,
+    "maxID":77,
     "label":"Scene",
     "isOpen":true,
     "isDirectory":true,
@@ -59,10 +59,10 @@
                 {
                     "x":30,
                     "type":"Image",
-                    "searchKey":"Image",
-                    "props":{"y":50.5,"x":271,"width":104,"skin":"images/button.png","label":"立即参与","height":39},
+                    "searchKey":"Image,button",
+                    "props":{"y":50.5,"x":271,"width":104,"visible":true,"skin":"images/button.png","name":"button","label":"立即参与","height":39},
                     "nodeParent":63,
-                    "label":"Image",
+                    "label":"button",
                     "isOpen":false,
                     "isDirectory":true,
                     "isAniNode":true,
@@ -79,6 +79,33 @@
                             "isAniNode":true,
                             "hasChild":false,
                             "compId":70,
+                            "child":[
+                                ]
+                        }]
+                },
+                {
+                    "x":30,
+                    "type":"Image",
+                    "searchKey":"Image,buttonDsiabled",
+                    "props":{"y":51,"x":271,"width":104,"visible":false,"skin":"images/button2.png","name":"buttonDsiabled","label":"立即参与","height":39},
+                    "nodeParent":63,
+                    "label":"buttonDsiabled",
+                    "isOpen":false,
+                    "isDirectory":true,
+                    "isAniNode":true,
+                    "hasChild":true,
+                    "compId":75,
+                    "child":[
+                        {
+                            "type":"Label",
+                            "searchKey":"Label",
+                            "props":{"y":10.5,"x":16,"text":"立即参与","fontSize":18,"font":"Microsoft YaHei","color":"#ffffff"},
+                            "nodeParent":75,
+                            "label":"Label",
+                            "isDirectory":false,
+                            "isAniNode":true,
+                            "hasChild":false,
+                            "compId":76,
                             "child":[
                                 ]
                         }]

@@ -53158,6 +53158,7 @@ class VSlider_Example {
 
 interface Window {
 	__hallSceneConfig: {
+		init?: ({ disableCouponButton, enableCouponButton }: { disableCouponButton: () => void, enableCouponButton: () => void }) => void
 		onProgress?: (p: number) => void
 		onComplete?: () => void
 		onCouponClick?: () => void
