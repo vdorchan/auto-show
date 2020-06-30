@@ -10,7 +10,7 @@ window.__hallSceneConfig = {
   },
   onProgress: onProgress, // loading 进程
   onComplete: onComplete, // loading 结束
-  onCouponClick: function ({ disableCouponButton }) {
+  onCouponClick: function ({ disableCouponButton, enableCouponButton }) {
     alert('你点击了优惠券')
     disableCouponButton()
   },
