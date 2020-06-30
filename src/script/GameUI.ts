@@ -34,6 +34,7 @@ export default class GameUI extends Laya.Scene {
   private couponButtonDisabled: Laya.Sprite
 
   private __hallSceneConfig = window.__hallSceneConfig
+  private bannerImages: {[prop: string]: string}
 
   constructor() {
     super()
@@ -53,6 +54,7 @@ export default class GameUI extends Laya.Scene {
     this.coupon = this.scene.getChildByName('coupon')
     this.couponButton = this.coupon.getChildByName('button') as Laya.Sprite
     this.couponButtonDisabled = this.coupon.getChildByName('buttonDsiabled') as Laya.Sprite
+    this.bannerImages = this.__hallSceneConfig.bannerImages
     this.preloadRes()
   }
 
@@ -104,21 +106,22 @@ export default class GameUI extends Laya.Scene {
 
   preloadRes() {
     var resource = [
-      'res/LayaScene_0619_04_scene01/Conventional/Assets/lipin-Obj3d66-810003-5-510.lm',
-      'res/LayaScene_0619_04_scene01/Conventional/Assets/lipin-Obj3d66-810003-7-647.lm',
-      'res/LayaScene_0619_04_scene01/Conventional/Assets/lipin-Obj3d66-810003-4-160.lm',
-      'res/LayaScene_0619_04_scene01/Conventional/Assets/lipin-Obj3d66-810003-9-923.lm',
-      'res/LayaScene_0619_04_scene01/Conventional/Assets/lipin-Obj3d66-810003-3-54.lm',
-      'res/LayaScene_0619_04_scene01/Conventional/Assets/lipin-Obj3d66-810003-20-205.lm',
-      'res/LayaScene_0619_04_scene01/Conventional/Assets/canary_wharf_2k.png',
-      'res/LayaScene_0619_04_scene01/Conventional/Assets/lipin-Obj3d66-810003-21-992.lm',
-      'res/LayaScene_0619_04_scene01/Conventional/Assets/lipin-Obj3d66-810003-18-821.lm',
-      'res/LayaScene_0619_04_scene01/Conventional/Assets/lipin-Obj3d66-810003-2-694.lm',
-      'res/LayaScene_0619_04_scene01/Conventional/Assets/lipin-Obj3d66-810003-6-1.lm',
-      'res/LayaScene_0619_04_scene01/Conventional/Assets/lipin-Obj3d66-810003-8-584.lm',
-      'res/LayaScene_0619_04_scene01/Conventional/Assets/lipin-Obj3d66-810003-11-365.lm',
-      'res/LayaScene_0619_04_scene01/Conventional/Assets/lipin-Obj3d66-810003-12-572.lm',
-      'res/LayaScene_0619_04_scene01/Conventional/3.ls',
+      'res/LayaScene_0629_01/Conventional/Assets/lipin-Obj3d66-810003-5-510.lm',
+      'res/LayaScene_0629_01/Conventional/Assets/lipin-Obj3d66-810003-7-647.lm',
+      'res/LayaScene_0629_01/Conventional/Assets/lipin-Obj3d66-810003-4-160.lm',
+      'res/LayaScene_0629_01/Conventional/Assets/lipin-Obj3d66-810003-9-923.lm',
+      'res/LayaScene_0629_01/Conventional/Assets/lipin-Obj3d66-810003-3-54.lm',
+      'res/LayaScene_0629_01/Conventional/Assets/lipin-Obj3d66-810003-20-205.lm',
+      'res/LayaScene_0629_01/Conventional/Assets/canary_wharf_2k.png',
+      'res/LayaScene_0629_01/Conventional/Assets/lipin-Obj3d66-810003-21-992.lm',
+      'res/LayaScene_0629_01/Conventional/Assets/lipin-Obj3d66-810003-18-821.lm',
+      'res/LayaScene_0629_01/Conventional/Assets/lipin-Obj3d66-810003-2-694.lm',
+      'res/LayaScene_0629_01/Conventional/Assets/lipin-Obj3d66-810003-6-1.lm',
+      'res/LayaScene_0629_01/Conventional/Assets/lipin-Obj3d66-810003-8-584.lm',
+      'res/LayaScene_0629_01/Conventional/Assets/lipin-Obj3d66-810003-11-365.lm',
+      'res/LayaScene_0629_01/Conventional/Assets/lipin-Obj3d66-810003-12-572.lm',
+      'res/LayaScene_0629_01/Conventional/3.ls',
+      ...Object.values(this.bannerImages),
       ...panCarConfig[0].list
     ]
     Laya.loader.create(resource, Laya.Handler.create(this, this.onPreLoadFinish), Laya.Handler.create(this, this.onProgress))
@@ -128,15 +131,30 @@ export default class GameUI extends Laya.Scene {
     this.emit('onProgress', p)
   }
 
+  setBannerImg() {
+    for (const nodeName in this.bannerImages) {
+      const banner = this._scene.getChildByName(nodeName) as Laya.MeshSprite3D
+      const img = this.bannerImages[nodeName]
+      if (banner) {
+        const mater = new Laya.BlinnPhongMaterial()
+        const texture = Laya.Loader.getRes(img) as Laya.Texture2D
+        mater.albedoTexture = texture
+        banner.meshRenderer.material = mater
+      }
+    }
+  }
+
   onPreLoadFinish() {
     this.emit('onComplete')
 
     // 主场景
-    this._scene = Laya.stage.addChild(Laya.Loader.getRes('res/LayaScene_0619_04_scene01/Conventional/3.ls')) as Laya.Scene3D
+    this._scene = Laya.stage.addChild(Laya.Loader.getRes('res/LayaScene_0629_01/Conventional/3.ls')) as Laya.Scene3D
     Laya.stage.setChildIndex(this._scene, 0)
 
     this.car = this._scene.getChildByName('car') as Laya.MeshSprite3D
     this.spinCar = this.car.addComponent(SpinCar)
+
+    this.setBannerImg()
 
     this.createCamera()
     this.createCharacter()

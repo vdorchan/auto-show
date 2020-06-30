@@ -18,6 +18,16 @@ window.__hallSceneConfig = {
     star: 3,
     title: '购置税减半至高5000元',
     car: '宝马xx'
+  },
+
+  // 从左到右为 banner1 到 banner5，正中间最长为 screen
+  bannerImages: {
+    banner1: 'res/banner/banner1.jpg',
+    banner2: 'res/banner/banner2.jpg',
+    banner3: 'res/banner/banner3.jpg',
+    banner4: 'res/banner/banner4.jpg',
+    banner5: 'res/banner/banner5.jpg',
+    screen: 'res/banner/screen.jpg',
   }
 }
 
