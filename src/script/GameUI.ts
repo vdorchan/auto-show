@@ -90,6 +90,7 @@ export default class GameUI extends Laya.Scene {
         this.emit('onCouponClick', {
           disableCouponButton: this.disableCouponButton.bind(this),
           enableCouponButton: this.enableCouponButton.bind(this),
+          couponButtonIsDisabled: this.couponButtonDisabled.visible
         })
       })
     } catch (error) {}

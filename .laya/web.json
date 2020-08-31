@@ -19,9 +19,11 @@
     ],
     "compressJs": true,
     "compressJsFilter": [
-        "$basePath/**/*.js"
+        "$basePath/*.js",
+        "!$basePath/main.js"
     ],
     "compressJsNoteList": [
+        "",
         ""
     ],
     "version": false,
@@ -62,5 +64,5 @@
     "onlyIndexJS": true,
     "es6toes5": false,
     "projectType": "ts",
-    "pubTime": 1592806206742
+    "pubTime": 1593505962821
 }

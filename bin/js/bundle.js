@@ -233,6 +233,9 @@
           this.$loading = document.getElementById('J-loading');
           this.$percentBar = this.$loading.querySelector('.percent-bar');
           this.coupon = this.scene.getChildByName('coupon');
+          this.couponButton = this.coupon.getChildByName('button');
+          this.couponButtonDisabled = this.coupon.getChildByName('buttonDsiabled');
+          this.bannerImages = this.__hallSceneConfig.bannerImages;
           this.preloadRes();
       }
       onEnable() {
@@ -258,7 +261,11 @@
               this.coupon.getChildByName('car').text = coupon.car;
               this.drawCouponStars(coupon.star);
               this.coupon.on(Laya.Event.CLICK, this, () => {
-                  this.emit('onCouponClick');
+                  this.emit('onCouponClick', {
+                      disableCouponButton: this.disableCouponButton.bind(this),
+                      enableCouponButton: this.enableCouponButton.bind(this),
+                      couponButtonIsDisabled: this.couponButtonDisabled.visible
+                  });
               });
           }
           catch (error) { }
@@ -273,21 +280,22 @@
       }
       preloadRes() {
           var resource = [
-              'res/LayaScene_0619_04_scene01/Conventional/Assets/lipin-Obj3d66-810003-5-510.lm',
-              'res/LayaScene_0619_04_scene01/Conventional/Assets/lipin-Obj3d66-810003-7-647.lm',
-              'res/LayaScene_0619_04_scene01/Conventional/Assets/lipin-Obj3d66-810003-4-160.lm',
-              'res/LayaScene_0619_04_scene01/Conventional/Assets/lipin-Obj3d66-810003-9-923.lm',
-              'res/LayaScene_0619_04_scene01/Conventional/Assets/lipin-Obj3d66-810003-3-54.lm',
-              'res/LayaScene_0619_04_scene01/Conventional/Assets/lipin-Obj3d66-810003-20-205.lm',
-              'res/LayaScene_0619_04_scene01/Conventional/Assets/canary_wharf_2k.png',
-              'res/LayaScene_0619_04_scene01/Conventional/Assets/lipin-Obj3d66-810003-21-992.lm',
-              'res/LayaScene_0619_04_scene01/Conventional/Assets/lipin-Obj3d66-810003-18-821.lm',
-              'res/LayaScene_0619_04_scene01/Conventional/Assets/lipin-Obj3d66-810003-2-694.lm',
-              'res/LayaScene_0619_04_scene01/Conventional/Assets/lipin-Obj3d66-810003-6-1.lm',
-              'res/LayaScene_0619_04_scene01/Conventional/Assets/lipin-Obj3d66-810003-8-584.lm',
-              'res/LayaScene_0619_04_scene01/Conventional/Assets/lipin-Obj3d66-810003-11-365.lm',
-              'res/LayaScene_0619_04_scene01/Conventional/Assets/lipin-Obj3d66-810003-12-572.lm',
-              'res/LayaScene_0619_04_scene01/Conventional/3.ls',
+              'res/LayaScene_0629_01/Conventional/Assets/lipin-Obj3d66-810003-5-510.lm',
+              'res/LayaScene_0629_01/Conventional/Assets/lipin-Obj3d66-810003-7-647.lm',
+              'res/LayaScene_0629_01/Conventional/Assets/lipin-Obj3d66-810003-4-160.lm',
+              'res/LayaScene_0629_01/Conventional/Assets/lipin-Obj3d66-810003-9-923.lm',
+              'res/LayaScene_0629_01/Conventional/Assets/lipin-Obj3d66-810003-3-54.lm',
+              'res/LayaScene_0629_01/Conventional/Assets/lipin-Obj3d66-810003-20-205.lm',
+              'res/LayaScene_0629_01/Conventional/Assets/canary_wharf_2k.png',
+              'res/LayaScene_0629_01/Conventional/Assets/lipin-Obj3d66-810003-21-992.lm',
+              'res/LayaScene_0629_01/Conventional/Assets/lipin-Obj3d66-810003-18-821.lm',
+              'res/LayaScene_0629_01/Conventional/Assets/lipin-Obj3d66-810003-2-694.lm',
+              'res/LayaScene_0629_01/Conventional/Assets/lipin-Obj3d66-810003-6-1.lm',
+              'res/LayaScene_0629_01/Conventional/Assets/lipin-Obj3d66-810003-8-584.lm',
+              'res/LayaScene_0629_01/Conventional/Assets/lipin-Obj3d66-810003-11-365.lm',
+              'res/LayaScene_0629_01/Conventional/Assets/lipin-Obj3d66-810003-12-572.lm',
+              'res/LayaScene_0629_01/Conventional/3.ls',
+              ...Object.values(this.bannerImages),
               ...panCarConfig[0].list
           ];
           Laya.loader.create(resource, Laya.Handler.create(this, this.onPreLoadFinish), Laya.Handler.create(this, this.onProgress));
@@ -295,18 +303,43 @@
       onProgress(p) {
           this.emit('onProgress', p);
       }
+      setBannerImg() {
+          for (const nodeName in this.bannerImages) {
+              const banner = this._scene.getChildByName(nodeName);
+              const img = this.bannerImages[nodeName];
+              if (banner) {
+                  const mater = new Laya.BlinnPhongMaterial();
+                  const texture = Laya.Loader.getRes(img);
+                  mater.albedoTexture = texture;
+                  banner.meshRenderer.material = mater;
+              }
+          }
+      }
       onPreLoadFinish() {
           this.emit('onComplete');
-          this._scene = Laya.stage.addChild(Laya.Loader.getRes('res/LayaScene_0619_04_scene01/Conventional/3.ls'));
+          this._scene = Laya.stage.addChild(Laya.Loader.getRes('res/LayaScene_0629_01/Conventional/3.ls'));
           Laya.stage.setChildIndex(this._scene, 0);
           this.car = this._scene.getChildByName('car');
           this.spinCar = this.car.addComponent(SpinCar);
+          this.setBannerImg();
           this.createCamera();
           this.createCharacter();
           this.createCoupon();
+          this.emit('init', {
+              disableCouponButton: this.disableCouponButton.bind(this),
+              enableCouponButton: this.enableCouponButton.bind(this),
+          });
           Laya.timer.frameLoop(1, this, () => {
               this.car.transform.lookAt(this.camera.transform.position, new Laya.Vector3(0, 1, 0));
           });
+      }
+      disableCouponButton() {
+          this.couponButton.visible = false;
+          this.couponButtonDisabled.visible = true;
+      }
+      enableCouponButton() {
+          this.couponButtonDisabled.visible = false;
+          this.couponButton.visible = true;
       }
       createCamera() {
           this.camera = this._scene.getChildByName('Main Camera');
