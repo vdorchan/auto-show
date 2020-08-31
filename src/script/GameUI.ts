@@ -196,6 +196,7 @@ export default class GameUI extends Laya.Scene {
   }
 
   moveCharacter() {
+
     if (this.controller && this.controller.angle !== -1) {
       const translateX = Math.sin(this.controller.radians) * this.speed
       const translateZ = Math.cos(this.controller.radians) * this.speed
@@ -214,6 +215,10 @@ export default class GameUI extends Laya.Scene {
     }
 
     this.camera.viewport.project(this.car.transform.position, this.camera.projectionViewMatrix, this._outPos)
+    // console.log(this._outPos)
+
+    // console.log( this._outPos.x >= 0 &&  this._outPos.x <= 1 &&  this._outPos.y >= 0 &&  this._outPos.y <= 1)
+    // console.log(this._outPos)
     if (this._outPos.z < 1) {
       const posX = this._outPos.x - this.coupon.getBounds().width / 2
       const posY = this._outPos.y - this.coupon.getBounds().height * 3
