@@ -10,17 +10,34 @@ window.__hallSceneConfig = {
   },
   onProgress: onProgress, // loading 进程
   onComplete: onComplete, // loading 结束
-  onCouponClick: function ({ disableCouponButton, enableCouponButton, couponButtonIsDisabled }) {
+  onCouponClick: function ({ index, disableCouponButton, enableCouponButton, couponButtonIsDisabled }) {
     if (!couponButtonIsDisabled) {
-      alert('你点击了优惠券')
+      alert(`你点击了第${index}个优惠券`)
       disableCouponButton()
     }
   },
-  coupon: {
-    star: 3,
-    title: '购置税减半至高5000元',
-    car: '宝马xx'
-  },
+  coupon: [
+    {
+      star: 3,
+      title: '购置税减半至高5000元',
+      car: '宝马xx'
+    },
+    {
+      star: 3,
+      title: '购置税减半至高5000元',
+      car: '宝马xx'
+    },
+    {
+      star: 3,
+      title: '购置税减半至高5000元',
+      car: '宝马xx'
+    },
+    {
+      star: 3,
+      title: '购置税减半至高5000元',
+      car: '宝马xx'
+    },
+],
 
   // 从左到右为 banner1 到 banner5，正中间最长为 screen
   bannerImages: {

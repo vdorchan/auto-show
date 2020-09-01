@@ -2,12 +2,12 @@
     "x":0,
     "type":"Scene",
     "selectedBox":1,
-    "selecteID":63,
+    "selecteID":95,
     "searchKey":"Scene",
     "referenceLines":null,
     "props":{"sceneWidth":1136,"sceneHeight":640,"sceneColor":"#000000","scaleX":1,"runtime":"script/GameUI.ts","positionVariance_0":100,"maxPartices":100},
     "nodeParent":-1,
-    "maxID":77,
+    "maxID":104,
     "label":"Scene",
     "isOpen":true,
     "isDirectory":true,
@@ -46,18 +46,17 @@
         {
             "x":15,
             "type":"Sprite",
-            "searchKey":"Sprite,coupon",
-            "props":{"y":270.5,"x":308,"visible":true,"texture":"images/coupon-bg.png","name":"coupon"},
+            "searchKey":"Sprite,coupon0",
+            "props":{"y":270.5,"x":308,"visible":true,"texture":"images/coupon-bg.png","name":"coupon0"},
             "nodeParent":1,
-            "label":"coupon",
-            "isOpen":true,
+            "label":"coupon0",
+            "isOpen":false,
             "isDirectory":true,
             "isAniNode":true,
             "hasChild":true,
             "compId":63,
             "child":[
                 {
-                    "x":30,
                     "type":"Image",
                     "searchKey":"Image,button",
                     "props":{"y":50.5,"x":271,"width":104,"visible":true,"skin":"images/button.png","name":"button","label":"立即参与","height":39},
@@ -84,7 +83,6 @@
                         }]
                 },
                 {
-                    "x":30,
                     "type":"Image",
                     "searchKey":"Image,buttonDsiabled",
                     "props":{"y":51,"x":271,"width":104,"visible":false,"skin":"images/button2.png","name":"buttonDsiabled","label":"立即参与","height":39},
@@ -111,7 +109,6 @@
                         }]
                 },
                 {
-                    "x":30,
                     "type":"Sprite",
                     "searchKey":"Sprite",
                     "props":{"y":0,"x":346,"texture":"images/deco.png"},
@@ -125,7 +122,6 @@
                         ]
                 },
                 {
-                    "x":30,
                     "type":"Label",
                     "searchKey":"Label,title",
                     "props":{"y":21.5,"x":33,"name":"title","fontSize":22,"font":"Microsoft YaHei","color":"#1e1d30"},
@@ -139,7 +135,6 @@
                         ]
                 },
                 {
-                    "x":30,
                     "type":"Label",
                     "searchKey":"Label,car",
                     "props":{"y":56,"x":33,"name":"car","fontSize":20,"font":"Microsoft YaHei","color":"#666d7f"},
@@ -153,7 +148,6 @@
                         ]
                 },
                 {
-                    "x":30,
                     "type":"Sprite",
                     "searchKey":"Sprite,stars",
                     "props":{"y":55,"x":119,"name":"stars"},
@@ -164,6 +158,363 @@
                     "isAniNode":true,
                     "hasChild":false,
                     "compId":73,
+                    "child":[
+                        ]
+                }]
+        },
+        {
+            "x":15,
+            "type":"Sprite",
+            "searchKey":"Sprite,coupon1",
+            "props":{"y":280,"x":318,"visible":true,"texture":"images/coupon-bg.png","name":"coupon1"},
+            "nodeParent":1,
+            "label":"coupon1",
+            "isOpen":false,
+            "isDirectory":true,
+            "isAniNode":true,
+            "hasChild":true,
+            "compId":77,
+            "child":[
+                {
+                    "type":"Image",
+                    "searchKey":"Image,button",
+                    "props":{"y":50.5,"x":271,"width":104,"visible":true,"skin":"images/button.png","name":"button","label":"立即参与","height":39},
+                    "nodeParent":77,
+                    "label":"button",
+                    "isOpen":false,
+                    "isDirectory":true,
+                    "isAniNode":true,
+                    "hasChild":true,
+                    "compId":78,
+                    "child":[
+                        {
+                            "type":"Label",
+                            "searchKey":"Label",
+                            "props":{"y":10.5,"x":16,"text":"立即参与","fontSize":18,"font":"Microsoft YaHei","color":"#ffffff"},
+                            "nodeParent":78,
+                            "label":"Label",
+                            "isDirectory":false,
+                            "isAniNode":true,
+                            "hasChild":false,
+                            "compId":79,
+                            "child":[
+                                ]
+                        }]
+                },
+                {
+                    "type":"Image",
+                    "searchKey":"Image,buttonDsiabled",
+                    "props":{"y":51,"x":271,"width":104,"visible":false,"skin":"images/button2.png","name":"buttonDsiabled","label":"立即参与","height":39},
+                    "nodeParent":77,
+                    "label":"buttonDsiabled",
+                    "isOpen":false,
+                    "isDirectory":true,
+                    "isAniNode":true,
+                    "hasChild":true,
+                    "compId":80,
+                    "child":[
+                        {
+                            "type":"Label",
+                            "searchKey":"Label",
+                            "props":{"y":10.5,"x":16,"text":"立即参与","fontSize":18,"font":"Microsoft YaHei","color":"#ffffff"},
+                            "nodeParent":80,
+                            "label":"Label",
+                            "isDirectory":false,
+                            "isAniNode":true,
+                            "hasChild":false,
+                            "compId":81,
+                            "child":[
+                                ]
+                        }]
+                },
+                {
+                    "type":"Sprite",
+                    "searchKey":"Sprite",
+                    "props":{"y":0,"x":346,"texture":"images/deco.png"},
+                    "nodeParent":77,
+                    "label":"Sprite",
+                    "isDirectory":false,
+                    "isAniNode":true,
+                    "hasChild":false,
+                    "compId":82,
+                    "child":[
+                        ]
+                },
+                {
+                    "type":"Label",
+                    "searchKey":"Label,title",
+                    "props":{"y":21.5,"x":33,"name":"title","fontSize":22,"font":"Microsoft YaHei","color":"#1e1d30"},
+                    "nodeParent":77,
+                    "label":"title",
+                    "isDirectory":false,
+                    "isAniNode":true,
+                    "hasChild":false,
+                    "compId":83,
+                    "child":[
+                        ]
+                },
+                {
+                    "type":"Label",
+                    "searchKey":"Label,car",
+                    "props":{"y":56,"x":33,"name":"car","fontSize":20,"font":"Microsoft YaHei","color":"#666d7f"},
+                    "nodeParent":77,
+                    "label":"car",
+                    "isDirectory":false,
+                    "isAniNode":true,
+                    "hasChild":false,
+                    "compId":84,
+                    "child":[
+                        ]
+                },
+                {
+                    "type":"Sprite",
+                    "searchKey":"Sprite,stars",
+                    "props":{"y":55,"x":119,"name":"stars"},
+                    "nodeParent":77,
+                    "label":"stars",
+                    "isOpen":true,
+                    "isDirectory":false,
+                    "isAniNode":true,
+                    "hasChild":false,
+                    "compId":85,
+                    "child":[
+                        ]
+                }]
+        },
+        {
+            "x":15,
+            "type":"Sprite",
+            "searchKey":"Sprite,coupon2",
+            "props":{"y":290,"x":328,"visible":true,"texture":"images/coupon-bg.png","name":"coupon2"},
+            "nodeParent":1,
+            "label":"coupon2",
+            "isOpen":false,
+            "isDirectory":true,
+            "isAniNode":true,
+            "hasChild":true,
+            "compId":86,
+            "child":[
+                {
+                    "type":"Image",
+                    "searchKey":"Image,button",
+                    "props":{"y":50.5,"x":271,"width":104,"visible":true,"skin":"images/button.png","name":"button","label":"立即参与","height":39},
+                    "nodeParent":86,
+                    "label":"button",
+                    "isOpen":false,
+                    "isDirectory":true,
+                    "isAniNode":true,
+                    "hasChild":true,
+                    "compId":87,
+                    "child":[
+                        {
+                            "type":"Label",
+                            "searchKey":"Label",
+                            "props":{"y":10.5,"x":16,"text":"立即参与","fontSize":18,"font":"Microsoft YaHei","color":"#ffffff"},
+                            "nodeParent":87,
+                            "label":"Label",
+                            "isDirectory":false,
+                            "isAniNode":true,
+                            "hasChild":false,
+                            "compId":88,
+                            "child":[
+                                ]
+                        }]
+                },
+                {
+                    "type":"Image",
+                    "searchKey":"Image,buttonDsiabled",
+                    "props":{"y":51,"x":271,"width":104,"visible":false,"skin":"images/button2.png","name":"buttonDsiabled","label":"立即参与","height":39},
+                    "nodeParent":86,
+                    "label":"buttonDsiabled",
+                    "isOpen":false,
+                    "isDirectory":true,
+                    "isAniNode":true,
+                    "hasChild":true,
+                    "compId":89,
+                    "child":[
+                        {
+                            "type":"Label",
+                            "searchKey":"Label",
+                            "props":{"y":10.5,"x":16,"text":"立即参与","fontSize":18,"font":"Microsoft YaHei","color":"#ffffff"},
+                            "nodeParent":89,
+                            "label":"Label",
+                            "isDirectory":false,
+                            "isAniNode":true,
+                            "hasChild":false,
+                            "compId":90,
+                            "child":[
+                                ]
+                        }]
+                },
+                {
+                    "type":"Sprite",
+                    "searchKey":"Sprite",
+                    "props":{"y":0,"x":346,"texture":"images/deco.png"},
+                    "nodeParent":86,
+                    "label":"Sprite",
+                    "isDirectory":false,
+                    "isAniNode":true,
+                    "hasChild":false,
+                    "compId":91,
+                    "child":[
+                        ]
+                },
+                {
+                    "type":"Label",
+                    "searchKey":"Label,title",
+                    "props":{"y":21.5,"x":33,"name":"title","fontSize":22,"font":"Microsoft YaHei","color":"#1e1d30"},
+                    "nodeParent":86,
+                    "label":"title",
+                    "isDirectory":false,
+                    "isAniNode":true,
+                    "hasChild":false,
+                    "compId":92,
+                    "child":[
+                        ]
+                },
+                {
+                    "type":"Label",
+                    "searchKey":"Label,car",
+                    "props":{"y":56,"x":33,"name":"car","fontSize":20,"font":"Microsoft YaHei","color":"#666d7f"},
+                    "nodeParent":86,
+                    "label":"car",
+                    "isDirectory":false,
+                    "isAniNode":true,
+                    "hasChild":false,
+                    "compId":93,
+                    "child":[
+                        ]
+                },
+                {
+                    "type":"Sprite",
+                    "searchKey":"Sprite,stars",
+                    "props":{"y":55,"x":119,"name":"stars"},
+                    "nodeParent":86,
+                    "label":"stars",
+                    "isOpen":true,
+                    "isDirectory":false,
+                    "isAniNode":true,
+                    "hasChild":false,
+                    "compId":94,
+                    "child":[
+                        ]
+                }]
+        },
+        {
+            "x":15,
+            "type":"Sprite",
+            "searchKey":"Sprite,coupon3",
+            "props":{"y":300,"x":338,"visible":true,"texture":"images/coupon-bg.png","name":"coupon3"},
+            "nodeParent":1,
+            "label":"coupon3",
+            "isOpen":false,
+            "isDirectory":true,
+            "isAniNode":true,
+            "hasChild":true,
+            "compId":95,
+            "child":[
+                {
+                    "type":"Image",
+                    "searchKey":"Image,button",
+                    "props":{"y":50.5,"x":271,"width":104,"visible":true,"skin":"images/button.png","name":"button","label":"立即参与","height":39},
+                    "nodeParent":95,
+                    "label":"button",
+                    "isOpen":false,
+                    "isDirectory":true,
+                    "isAniNode":true,
+                    "hasChild":true,
+                    "compId":96,
+                    "child":[
+                        {
+                            "type":"Label",
+                            "searchKey":"Label",
+                            "props":{"y":10.5,"x":16,"text":"立即参与","fontSize":18,"font":"Microsoft YaHei","color":"#ffffff"},
+                            "nodeParent":96,
+                            "label":"Label",
+                            "isDirectory":false,
+                            "isAniNode":true,
+                            "hasChild":false,
+                            "compId":97,
+                            "child":[
+                                ]
+                        }]
+                },
+                {
+                    "type":"Image",
+                    "searchKey":"Image,buttonDsiabled",
+                    "props":{"y":51,"x":271,"width":104,"visible":false,"skin":"images/button2.png","name":"buttonDsiabled","label":"立即参与","height":39},
+                    "nodeParent":95,
+                    "label":"buttonDsiabled",
+                    "isOpen":false,
+                    "isDirectory":true,
+                    "isAniNode":true,
+                    "hasChild":true,
+                    "compId":98,
+                    "child":[
+                        {
+                            "type":"Label",
+                            "searchKey":"Label",
+                            "props":{"y":10.5,"x":16,"text":"立即参与","fontSize":18,"font":"Microsoft YaHei","color":"#ffffff"},
+                            "nodeParent":98,
+                            "label":"Label",
+                            "isDirectory":false,
+                            "isAniNode":true,
+                            "hasChild":false,
+                            "compId":99,
+                            "child":[
+                                ]
+                        }]
+                },
+                {
+                    "type":"Sprite",
+                    "searchKey":"Sprite",
+                    "props":{"y":0,"x":346,"texture":"images/deco.png"},
+                    "nodeParent":95,
+                    "label":"Sprite",
+                    "isDirectory":false,
+                    "isAniNode":true,
+                    "hasChild":false,
+                    "compId":100,
+                    "child":[
+                        ]
+                },
+                {
+                    "type":"Label",
+                    "searchKey":"Label,title",
+                    "props":{"y":21.5,"x":33,"name":"title","fontSize":22,"font":"Microsoft YaHei","color":"#1e1d30"},
+                    "nodeParent":95,
+                    "label":"title",
+                    "isDirectory":false,
+                    "isAniNode":true,
+                    "hasChild":false,
+                    "compId":101,
+                    "child":[
+                        ]
+                },
+                {
+                    "type":"Label",
+                    "searchKey":"Label,car",
+                    "props":{"y":56,"x":33,"name":"car","fontSize":20,"font":"Microsoft YaHei","color":"#666d7f"},
+                    "nodeParent":95,
+                    "label":"car",
+                    "isDirectory":false,
+                    "isAniNode":true,
+                    "hasChild":false,
+                    "compId":102,
+                    "child":[
+                        ]
+                },
+                {
+                    "type":"Sprite",
+                    "searchKey":"Sprite,stars",
+                    "props":{"y":55,"x":119,"name":"stars"},
+                    "nodeParent":95,
+                    "label":"stars",
+                    "isOpen":true,
+                    "isDirectory":false,
+                    "isAniNode":true,
+                    "hasChild":false,
+                    "compId":103,
                     "child":[
                         ]
                 }]

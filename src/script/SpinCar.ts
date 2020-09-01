@@ -22,8 +22,10 @@ export default class SpinCar extends Laya.Script3D {
     this.panoCars = panCarConfig
     this.carUrls = this.panoCars[0].list
     this.car = this.owner as Laya.MeshSprite3D
-    this.createColorPick()
-    this.onColorPick(0)
+    if (this.car['showColorPick']) {
+      this.createColorPick()
+      this.onColorPick(0)
+    }
 
     Laya.stage.on(Laya.Event.MOUSE_MOVE, this, this.handleMouseMove)
     Laya.stage.on(Laya.Event.MOUSE_UP, this, this.handleMouseUp)
@@ -174,5 +176,9 @@ export default class SpinCar extends Laya.Script3D {
   onCollisionEnter(collision) {
     console.log('撞车了')
     this.autoSpin()
+  }
+
+  onUpdate() {
+    console.log('onUpdate', this.owner.parent)
   }
 }

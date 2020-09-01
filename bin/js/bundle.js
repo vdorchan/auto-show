@@ -22,8 +22,10 @@
           this.panoCars = panCarConfig;
           this.carUrls = this.panoCars[0].list;
           this.car = this.owner;
-          this.createColorPick();
-          this.onColorPick(0);
+          if (this.car['showColorPick']) {
+              this.createColorPick();
+              this.onColorPick(0);
+          }
           Laya.stage.on(Laya.Event.MOUSE_MOVE, this, this.handleMouseMove);
           Laya.stage.on(Laya.Event.MOUSE_UP, this, this.handleMouseUp);
       }
@@ -148,6 +150,9 @@
           console.log('撞车了');
           this.autoSpin();
       }
+      onUpdate() {
+          console.log('onUpdate', this.owner.parent);
+      }
   }
 
   class CameraRotate extends Laya.Script3D {
@@ -232,11 +237,18 @@
           Laya.stage.screenMode = Laya.Stage.SCREEN_HORIZONTAL;
           this.$loading = document.getElementById('J-loading');
           this.$percentBar = this.$loading.querySelector('.percent-bar');
-          this.coupon = this.scene.getChildByName('coupon');
-          this.couponButton = this.coupon.getChildByName('button');
-          this.couponButtonDisabled = this.coupon.getChildByName('buttonDsiabled');
+          this.coupons = [];
+          for (let index = 0; index < 4; index++) {
+              const coupon = this.scene.getChildByName(`coupon${index}`);
+              this.coupons.push({
+                  coupon,
+                  couponButton: coupon.getChildByName('button'),
+                  couponButtonDisabled: coupon.getChildByName('buttonDsiabled'),
+              });
+          }
           this.bannerImages = this.__hallSceneConfig.bannerImages;
           this.preloadRes();
+          console.log('stage', Laya.stage);
       }
       onEnable() {
       }
@@ -256,45 +268,50 @@
       }
       createCoupon() {
           try {
-              const coupon = this.__hallSceneConfig.coupon;
-              this.coupon.getChildByName('title').text = coupon.title;
-              this.coupon.getChildByName('car').text = coupon.car;
-              this.drawCouponStars(coupon.star);
-              this.coupon.on(Laya.Event.CLICK, this, () => {
-                  this.emit('onCouponClick', {
-                      disableCouponButton: this.disableCouponButton.bind(this),
-                      enableCouponButton: this.enableCouponButton.bind(this),
-                      couponButtonIsDisabled: this.couponButtonDisabled.visible
+              const couponListConfig = this.__hallSceneConfig.coupon;
+              for (let index = 0; index < couponListConfig.length; index++) {
+                  const couponConfig = couponListConfig[index];
+                  const coupon = this.coupons[index];
+                  coupon.coupon.getChildByName('title').text = couponConfig.title;
+                  coupon.coupon.getChildByName('car').text = couponConfig.car;
+                  this.drawCouponStars(coupon, couponConfig.star);
+                  coupon.coupon.on(Laya.Event.CLICK, this, () => {
+                      this.emit('onCouponClick', {
+                          index,
+                          disableCouponButton: this.disableCouponButton.bind(this),
+                          enableCouponButton: this.enableCouponButton.bind(this),
+                          couponButtonIsDisabled: this.couponButtonDisabled.visible
+                      });
                   });
-              });
+              }
           }
           catch (error) { }
       }
-      drawCouponStars(num = 1) {
-          this.couponStars = this.coupon.getChildByName('stars');
+      drawCouponStars(coupon, num = 1) {
+          coupon.couponStars = coupon.coupon.getChildByName('stars');
           for (let i = 0; i < 5; i++) {
               const star = new Laya.Image(`res/images/star${i + 1 <= num ? 2 : 1}.png`);
               star.pos(i * 20, 0);
-              this.couponStars.addChild(star);
+              coupon.couponStars.addChild(star);
           }
       }
       preloadRes() {
           var resource = [
-              'res/LayaScene_0629_01/Conventional/Assets/lipin-Obj3d66-810003-5-510.lm',
-              'res/LayaScene_0629_01/Conventional/Assets/lipin-Obj3d66-810003-7-647.lm',
-              'res/LayaScene_0629_01/Conventional/Assets/lipin-Obj3d66-810003-4-160.lm',
-              'res/LayaScene_0629_01/Conventional/Assets/lipin-Obj3d66-810003-9-923.lm',
-              'res/LayaScene_0629_01/Conventional/Assets/lipin-Obj3d66-810003-3-54.lm',
-              'res/LayaScene_0629_01/Conventional/Assets/lipin-Obj3d66-810003-20-205.lm',
-              'res/LayaScene_0629_01/Conventional/Assets/canary_wharf_2k.png',
-              'res/LayaScene_0629_01/Conventional/Assets/lipin-Obj3d66-810003-21-992.lm',
-              'res/LayaScene_0629_01/Conventional/Assets/lipin-Obj3d66-810003-18-821.lm',
-              'res/LayaScene_0629_01/Conventional/Assets/lipin-Obj3d66-810003-2-694.lm',
-              'res/LayaScene_0629_01/Conventional/Assets/lipin-Obj3d66-810003-6-1.lm',
-              'res/LayaScene_0629_01/Conventional/Assets/lipin-Obj3d66-810003-8-584.lm',
-              'res/LayaScene_0629_01/Conventional/Assets/lipin-Obj3d66-810003-11-365.lm',
-              'res/LayaScene_0629_01/Conventional/Assets/lipin-Obj3d66-810003-12-572.lm',
-              'res/LayaScene_0629_01/Conventional/3.ls',
+              'res/LayaScene_3/Conventional/Assets/lipin-Obj3d66-810003-5-510.lm',
+              'res/LayaScene_3/Conventional/Assets/lipin-Obj3d66-810003-7-647.lm',
+              'res/LayaScene_3/Conventional/Assets/lipin-Obj3d66-810003-4-160.lm',
+              'res/LayaScene_3/Conventional/Assets/lipin-Obj3d66-810003-9-923.lm',
+              'res/LayaScene_3/Conventional/Assets/lipin-Obj3d66-810003-3-54.lm',
+              'res/LayaScene_3/Conventional/Assets/lipin-Obj3d66-810003-20-205.lm',
+              'res/LayaScene_3/Conventional/Assets/canary_wharf_2k.png',
+              'res/LayaScene_3/Conventional/Assets/lipin-Obj3d66-810003-21-992.lm',
+              'res/LayaScene_3/Conventional/Assets/lipin-Obj3d66-810003-18-821.lm',
+              'res/LayaScene_3/Conventional/Assets/lipin-Obj3d66-810003-2-694.lm',
+              'res/LayaScene_3/Conventional/Assets/lipin-Obj3d66-810003-6-1.lm',
+              'res/LayaScene_3/Conventional/Assets/lipin-Obj3d66-810003-8-584.lm',
+              'res/LayaScene_3/Conventional/Assets/lipin-Obj3d66-810003-11-365.lm',
+              'res/LayaScene_3/Conventional/Assets/lipin-Obj3d66-810003-12-572.lm',
+              'res/LayaScene_3/Conventional/3.ls',
               ...Object.values(this.bannerImages),
               ...panCarConfig[0].list
           ];
@@ -317,10 +334,20 @@
       }
       onPreLoadFinish() {
           this.emit('onComplete');
-          this._scene = Laya.stage.addChild(Laya.Loader.getRes('res/LayaScene_0629_01/Conventional/3.ls'));
+          this._scene = Laya.stage.addChild(Laya.Loader.getRes('res/LayaScene_3/Conventional/3.ls'));
           Laya.stage.setChildIndex(this._scene, 0);
-          this.car = this._scene.getChildByName('car');
-          this.spinCar = this.car.addComponent(SpinCar);
+          this.cars = [
+              this._scene.getChildByName('car'),
+              this._scene.getChildByName('car2'),
+              this._scene.getChildByName('car2 (1)'),
+              this._scene.getChildByName('car2 (2)'),
+          ];
+          Object.assign(this.cars[0], { showColorPick: true });
+          this.spinCars = [];
+          for (let index = 0; index < this.cars.length; index++) {
+              const car = this.cars[index];
+              this.spinCars.push(car.addComponent(SpinCar));
+          }
           this.setBannerImg();
           this.createCamera();
           this.createCharacter();
@@ -330,16 +357,21 @@
               enableCouponButton: this.enableCouponButton.bind(this),
           });
           Laya.timer.frameLoop(1, this, () => {
-              this.car.transform.lookAt(this.camera.transform.position, new Laya.Vector3(0, 1, 0));
+              for (let index = 0; index < this.cars.length; index++) {
+                  const car = this.cars[index];
+                  car.transform.lookAt(this.camera.transform.position, new Laya.Vector3(0, 1, 0));
+              }
           });
       }
-      disableCouponButton() {
-          this.couponButton.visible = false;
-          this.couponButtonDisabled.visible = true;
+      disableCouponButton(index) {
+          const { couponButton, couponButtonDisabled } = this.coupons[index];
+          couponButton.visible = false;
+          couponButtonDisabled.visible = true;
       }
-      enableCouponButton() {
-          this.couponButtonDisabled.visible = false;
-          this.couponButton.visible = true;
+      enableCouponButton(index) {
+          const { couponButton, couponButtonDisabled } = this.coupons[index];
+          couponButtonDisabled.visible = false;
+          couponButton.visible = true;
       }
       createCamera() {
           this.camera = this._scene.getChildByName('Main Camera');
@@ -359,16 +391,26 @@
               this.camera.transform.translate(new Laya.Vector3(translateX, 0, translateZ));
           }
           else {
-              if (!this.spinCar.isMouseDown) {
+              if (this.spinCars.every(s => !s.isMouseDown)) {
                   this.cameraRotate.startUpdate();
               }
           }
-          this.camera.viewport.project(this.car.transform.position, this.camera.projectionViewMatrix, this._outPos);
-          if (this._outPos.z < 1) {
-              const posX = this._outPos.x - this.coupon.getBounds().width / 2;
-              const posY = this._outPos.y - this.coupon.getBounds().height * 3;
-              this.coupon.pos(posX, posY);
-              this.coupon.scaleX = this.coupon.scaleY = (this._outPos.z + 2) / Laya.Browser.window.devicePixelRatio;
+          for (let index = 0; index < this.cars.length; index++) {
+              const car = this.cars[index];
+              const outPos = new Laya.Vector4();
+              const { coupon } = this.coupons[index];
+              this.camera.viewport.project(car.transform.position, this.camera.projectionViewMatrix, outPos);
+              if (outPos.z < 1) {
+                  const posX = outPos.x - coupon.getBounds().width / 2;
+                  const posY = outPos.y - coupon.getBounds().height * 3;
+                  if (index === 0) {
+                  }
+                  coupon.pos(posX, posY);
+                  coupon.scaleX = coupon.scaleY = (outPos.z + 2) / Laya.Browser.window.devicePixelRatio;
+              }
+              else {
+                  coupon.pos(-10000, -10000);
+              }
           }
       }
       createLight() {

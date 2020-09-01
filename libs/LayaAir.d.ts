@@ -53166,7 +53166,7 @@ interface Window {
 			star: number
 			title: string
 			car: string
-		},
+		}[],
 		bannerImages: {[prop: string]: string}
 	}
 }
