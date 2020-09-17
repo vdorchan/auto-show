@@ -21,19 +21,8 @@ export default class GameUI extends Laya.Scene {
 
   public speed: number = 0.04
 
-  // private translateW = new Laya.Vector3(0, 0, -0.02)
-  // private translateS = new Laya.Vector3(0, 0, 0.02)
-  // private translateA = new Laya.Vector3(-0.02, 0, 0)
-  // private translateD = new Laya.Vector3(0.02, 0, 0)
-
   $loading: any
   $percentBar: any
-
-  private _outPos = new Laya.Vector4()
-  private coupon: Laya.Image
-  private couponStars: Laya.Sprite
-  private couponButton: Laya.Sprite
-  private couponButtonDisabled: Laya.Sprite
 
   private coupons: {
     coupon: Laya.Image
@@ -44,6 +33,10 @@ export default class GameUI extends Laya.Scene {
 
   private __hallSceneConfig = window.__hallSceneConfig
   private bannerImages: { [prop: string]: string }
+
+  private point: Laya.Vector2 = new Laya.Vector2()
+  private _ray: Laya.Ray = new Laya.Ray(new Laya.Vector3(0, 0, 0), new Laya.Vector3(0, 0, 0))
+  private _outHitResult: Laya.HitResult = new Laya.HitResult();
 
   constructor() {
     super()
@@ -74,6 +67,8 @@ export default class GameUI extends Laya.Scene {
 
     this.bannerImages = this.__hallSceneConfig.bannerImages
     this.preloadRes()
+
+    Laya.stage.on(Laya.Event.MOUSE_DOWN, this, this.onMouseDown)
 
     console.log('stage', Laya.stage)
   }
@@ -115,8 +110,13 @@ export default class GameUI extends Laya.Scene {
             index,
             disableCouponButton: this.disableCouponButton.bind(this),
             enableCouponButton: this.enableCouponButton.bind(this),
-            couponButtonIsDisabled: this.couponButtonDisabled.visible
+            couponButtonIsDisabled: coupon.couponButtonDisabled.visible
           })
+        })
+
+        this.emit('init', {
+          disableCouponButton: this.disableCouponButton.bind(this),
+          enableCouponButton: this.enableCouponButton.bind(this),
         })
 
       }
@@ -135,21 +135,21 @@ export default class GameUI extends Laya.Scene {
 
   preloadRes() {
     var resource = [
-      'res/LayaScene_3/Conventional/Assets/lipin-Obj3d66-810003-5-510.lm',
-      'res/LayaScene_3/Conventional/Assets/lipin-Obj3d66-810003-7-647.lm',
-      'res/LayaScene_3/Conventional/Assets/lipin-Obj3d66-810003-4-160.lm',
-      'res/LayaScene_3/Conventional/Assets/lipin-Obj3d66-810003-9-923.lm',
-      'res/LayaScene_3/Conventional/Assets/lipin-Obj3d66-810003-3-54.lm',
-      'res/LayaScene_3/Conventional/Assets/lipin-Obj3d66-810003-20-205.lm',
-      'res/LayaScene_3/Conventional/Assets/canary_wharf_2k.png',
-      'res/LayaScene_3/Conventional/Assets/lipin-Obj3d66-810003-21-992.lm',
-      'res/LayaScene_3/Conventional/Assets/lipin-Obj3d66-810003-18-821.lm',
-      'res/LayaScene_3/Conventional/Assets/lipin-Obj3d66-810003-2-694.lm',
-      'res/LayaScene_3/Conventional/Assets/lipin-Obj3d66-810003-6-1.lm',
-      'res/LayaScene_3/Conventional/Assets/lipin-Obj3d66-810003-8-584.lm',
-      'res/LayaScene_3/Conventional/Assets/lipin-Obj3d66-810003-11-365.lm',
-      'res/LayaScene_3/Conventional/Assets/lipin-Obj3d66-810003-12-572.lm',
-      'res/LayaScene_3/Conventional/3.ls',
+      'res/LayaScene_0917/Conventional/Assets/lipin-Obj3d66-810003-5-510.lm',
+      'res/LayaScene_0917/Conventional/Assets/lipin-Obj3d66-810003-7-647.lm',
+      'res/LayaScene_0917/Conventional/Assets/lipin-Obj3d66-810003-4-160.lm',
+      'res/LayaScene_0917/Conventional/Assets/lipin-Obj3d66-810003-9-923.lm',
+      'res/LayaScene_0917/Conventional/Assets/lipin-Obj3d66-810003-3-54.lm',
+      'res/LayaScene_0917/Conventional/Assets/lipin-Obj3d66-810003-20-205.lm',
+      'res/LayaScene_0917/Conventional/Assets/canary_wharf_2k.png',
+      'res/LayaScene_0917/Conventional/Assets/lipin-Obj3d66-810003-21-992.lm',
+      'res/LayaScene_0917/Conventional/Assets/lipin-Obj3d66-810003-18-821.lm',
+      'res/LayaScene_0917/Conventional/Assets/lipin-Obj3d66-810003-2-694.lm',
+      'res/LayaScene_0917/Conventional/Assets/lipin-Obj3d66-810003-6-1.lm',
+      'res/LayaScene_0917/Conventional/Assets/lipin-Obj3d66-810003-8-584.lm',
+      'res/LayaScene_0917/Conventional/Assets/lipin-Obj3d66-810003-11-365.lm',
+      'res/LayaScene_0917/Conventional/Assets/lipin-Obj3d66-810003-12-572.lm',
+      'res/LayaScene_0917/Conventional/3.ls',
       ...Object.values(this.bannerImages),
       ...panCarConfig[0].list
     ]
@@ -177,7 +177,7 @@ export default class GameUI extends Laya.Scene {
     this.emit('onComplete')
 
     // 主场景
-    this._scene = Laya.stage.addChild(Laya.Loader.getRes('res/LayaScene_3/Conventional/3.ls')) as Laya.Scene3D
+    this._scene = Laya.stage.addChild(Laya.Loader.getRes('res/LayaScene_0917/Conventional/3.ls')) as Laya.Scene3D
     Laya.stage.setChildIndex(this._scene, 0)
 
     this.cars = [
@@ -200,12 +200,6 @@ export default class GameUI extends Laya.Scene {
     this.createCamera()
     this.createCharacter()
     this.createCoupon()
-    // this.controller.show()
-
-    this.emit('init', {
-      disableCouponButton: this.disableCouponButton.bind(this),
-      enableCouponButton: this.enableCouponButton.bind(this),
-    })
 
     Laya.timer.frameLoop(1, this, () => {
       for (let index = 0; index < this.cars.length; index++) {
@@ -213,6 +207,8 @@ export default class GameUI extends Laya.Scene {
         car.transform.lookAt(this.camera.transform.position, new Laya.Vector3(0, 1, 0))
       }
     })
+
+
   }
 
   disableCouponButton(index) {
@@ -245,18 +241,11 @@ export default class GameUI extends Laya.Scene {
     if (this.controller && this.controller.angle !== -1) {
       const translateX = Math.sin(this.controller.radians) * this.speed
       const translateZ = Math.cos(this.controller.radians) * this.speed
-      // this.character.move(new Laya.Vector3(translateX, 0, translateZ))
       this.camera.transform.translate(new Laya.Vector3(translateX, 0, translateZ))
     } else {
       if (this.spinCars.every(s => !s.isMouseDown)) {
         this.cameraRotate.startUpdate()
       }
-
-      // Laya.KeyBoardManager.hasKeyDown(87) && this.camera.transform.translate(this.translateW) //W
-      // Laya.KeyBoardManager.hasKeyDown(83) && this.camera.transform.translate(this.translateS) //S
-      // Laya.KeyBoardManager.hasKeyDown(65) && this.camera.transform.translate(this.translateA) //A
-      // Laya.KeyBoardManager.hasKeyDown(68) && this.camera.transform.translate(this.translateD) //D
-      // Laya.KeyBoardManager.hasKeyDown(69) && character.jump(); //E
     }
 
     for (let index = 0; index < this.cars.length; index++) {
@@ -267,8 +256,10 @@ export default class GameUI extends Laya.Scene {
       if (outPos.z < 1) {
         const posX = outPos.x - coupon.getBounds().width / 2
         const posY = outPos.y - coupon.getBounds().height * 3
-        if (index === 0) {
-          // console.log({posX,posY})
+        if (index !== 0) {
+          this.spinCars[0].hideColorPick()
+        } else {
+          this.spinCars[0].showColorPick()
         }
         coupon.pos(posX, posY)
         coupon.scaleX = coupon.scaleY = (outPos.z + 2) / Laya.Browser.window.devicePixelRatio
@@ -276,19 +267,6 @@ export default class GameUI extends Laya.Scene {
         coupon.pos(-10000, -10000)
       }
     }
-
-
-    // this.camera.viewport.project(this.car.transform.position, this.camera.projectionViewMatrix, this._outPos)
-    // // console.log(this._outPos)
-
-    // // console.log( this._outPos.x >= 0 &&  this._outPos.x <= 1 &&  this._outPos.y >= 0 &&  this._outPos.y <= 1)
-    // // console.log(this._outPos)
-    // if (this._outPos.z < 1) {
-    //   const posX = this._outPos.x - this.coupon.getBounds().width / 2
-    //   const posY = this._outPos.y - this.coupon.getBounds().height * 3
-    //   this.coupon.pos(posX, posY)
-    //   this.coupon.scaleX = this.coupon.scaleY = (this._outPos.z + 2) / Laya.Browser.window.devicePixelRatio
-    // }
   }
 
   createLight() {
@@ -298,5 +276,33 @@ export default class GameUI extends Laya.Scene {
     directionLight.transform.rotate(new Laya.Vector3(-3.14 / 3, 0, 0))
   }
 
-  onMouseDown() { }
+  onMouseDown() {
+    try {
+      this.point.x = Laya.MouseManager.instance.mouseX;
+      this.point.y = Laya.MouseManager.instance.mouseY;
+      //产生射线
+      this.camera.viewportPointToRay(this.point, this._ray);
+      //拿到射线碰撞的物体
+      this._scene.physicsSimulation.rayCast(this._ray, this._outHitResult);
+      //如果碰撞到物体
+      if (this._outHitResult.succeeded) {
+        const colliderName = this._outHitResult.collider.owner.name
+        console.log({ colliderName})
+
+        this.spinCars.forEach(spinCar => {
+          if (spinCar.car.name === colliderName) {
+            spinCar.isMouseDown = true
+            spinCar.startX = Laya.stage.mouseX
+          }
+        })
+
+        if (colliderName === 'pengzhuang') {
+          this.emit('onTurntableClick')
+        }
+      }
+
+    } catch (error) {
+      console.log(error)
+    }
+  }
 }

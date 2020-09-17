@@ -62,6 +62,14 @@ export default class SpinCar extends Laya.Script3D {
     this.createColorPickItem()
   }
 
+  hideColorPick() {
+    this.colorPick.visible = false
+  }
+
+  showColorPick() {
+    this.colorPick.visible = true
+  }
+
   createColorPickItem() {
     for (let index = 0; index < this.panoCars.length; index++) {
       const car = this.panoCars[index]
@@ -136,11 +144,13 @@ export default class SpinCar extends Laya.Script3D {
   //物体必须拥有碰撞组件（Collider）
   //当被鼠标点击
   onMouseDown() {
-    this.isMouseDown = true
-    this.startX = Laya.stage.mouseX
+    console.log('car mousedown')
+    // this.isMouseDown = true
+    // this.startX = Laya.stage.mouseX
   }
 
   handleMouseUp() {
+    console.log('car mouseup')
     this.isMouseDown = false
     this.startX = null
   }
@@ -179,6 +189,6 @@ export default class SpinCar extends Laya.Script3D {
   }
 
   onUpdate() {
-    console.log('onUpdate', this.owner.parent)
+    // console.log('onUpdate', this.owner.parent)
   }
 }
