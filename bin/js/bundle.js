@@ -53,6 +53,12 @@
               .pos(Laya.stage.width / 2, Laya.stage.height - height - 100);
           this.createColorPickItem();
       }
+      hideColorPick() {
+          this.colorPick.visible = false;
+      }
+      showColorPick() {
+          this.colorPick.visible = true;
+      }
       createColorPickItem() {
           for (let index = 0; index < this.panoCars.length; index++) {
               const car = this.panoCars[index];
@@ -115,10 +121,10 @@
           this.setTexture();
       }
       onMouseDown() {
-          this.isMouseDown = true;
-          this.startX = Laya.stage.mouseX;
+          console.log('car mousedown');
       }
       handleMouseUp() {
+          console.log('car mouseup');
           this.isMouseDown = false;
           this.startX = null;
       }
@@ -151,7 +157,6 @@
           this.autoSpin();
       }
       onUpdate() {
-          console.log('onUpdate', this.owner.parent);
       }
   }
 
@@ -226,8 +231,10 @@
           this.angle = -1;
           this.radians = -1;
           this.speed = 0.04;
-          this._outPos = new Laya.Vector4();
           this.__hallSceneConfig = window.__hallSceneConfig;
+          this.point = new Laya.Vector2();
+          this._ray = new Laya.Ray(new Laya.Vector3(0, 0, 0), new Laya.Vector3(0, 0, 0));
+          this._outHitResult = new Laya.HitResult();
           console.log(this);
           this.loadScene('Hall.scene');
           Laya.MouseManager.multiTouchEnabled = false;
@@ -248,6 +255,7 @@
           }
           this.bannerImages = this.__hallSceneConfig.bannerImages;
           this.preloadRes();
+          Laya.stage.on(Laya.Event.MOUSE_DOWN, this, this.onMouseDown);
           console.log('stage', Laya.stage);
       }
       onEnable() {
@@ -280,8 +288,12 @@
                           index,
                           disableCouponButton: this.disableCouponButton.bind(this),
                           enableCouponButton: this.enableCouponButton.bind(this),
-                          couponButtonIsDisabled: this.couponButtonDisabled.visible
+                          couponButtonIsDisabled: coupon.couponButtonDisabled.visible
                       });
+                  });
+                  this.emit('init', {
+                      disableCouponButton: this.disableCouponButton.bind(this),
+                      enableCouponButton: this.enableCouponButton.bind(this),
                   });
               }
           }
@@ -297,21 +309,21 @@
       }
       preloadRes() {
           var resource = [
-              'res/LayaScene_3/Conventional/Assets/lipin-Obj3d66-810003-5-510.lm',
-              'res/LayaScene_3/Conventional/Assets/lipin-Obj3d66-810003-7-647.lm',
-              'res/LayaScene_3/Conventional/Assets/lipin-Obj3d66-810003-4-160.lm',
-              'res/LayaScene_3/Conventional/Assets/lipin-Obj3d66-810003-9-923.lm',
-              'res/LayaScene_3/Conventional/Assets/lipin-Obj3d66-810003-3-54.lm',
-              'res/LayaScene_3/Conventional/Assets/lipin-Obj3d66-810003-20-205.lm',
-              'res/LayaScene_3/Conventional/Assets/canary_wharf_2k.png',
-              'res/LayaScene_3/Conventional/Assets/lipin-Obj3d66-810003-21-992.lm',
-              'res/LayaScene_3/Conventional/Assets/lipin-Obj3d66-810003-18-821.lm',
-              'res/LayaScene_3/Conventional/Assets/lipin-Obj3d66-810003-2-694.lm',
-              'res/LayaScene_3/Conventional/Assets/lipin-Obj3d66-810003-6-1.lm',
-              'res/LayaScene_3/Conventional/Assets/lipin-Obj3d66-810003-8-584.lm',
-              'res/LayaScene_3/Conventional/Assets/lipin-Obj3d66-810003-11-365.lm',
-              'res/LayaScene_3/Conventional/Assets/lipin-Obj3d66-810003-12-572.lm',
-              'res/LayaScene_3/Conventional/3.ls',
+              'res/LayaScene_0917/Conventional/Assets/lipin-Obj3d66-810003-5-510.lm',
+              'res/LayaScene_0917/Conventional/Assets/lipin-Obj3d66-810003-7-647.lm',
+              'res/LayaScene_0917/Conventional/Assets/lipin-Obj3d66-810003-4-160.lm',
+              'res/LayaScene_0917/Conventional/Assets/lipin-Obj3d66-810003-9-923.lm',
+              'res/LayaScene_0917/Conventional/Assets/lipin-Obj3d66-810003-3-54.lm',
+              'res/LayaScene_0917/Conventional/Assets/lipin-Obj3d66-810003-20-205.lm',
+              'res/LayaScene_0917/Conventional/Assets/canary_wharf_2k.png',
+              'res/LayaScene_0917/Conventional/Assets/lipin-Obj3d66-810003-21-992.lm',
+              'res/LayaScene_0917/Conventional/Assets/lipin-Obj3d66-810003-18-821.lm',
+              'res/LayaScene_0917/Conventional/Assets/lipin-Obj3d66-810003-2-694.lm',
+              'res/LayaScene_0917/Conventional/Assets/lipin-Obj3d66-810003-6-1.lm',
+              'res/LayaScene_0917/Conventional/Assets/lipin-Obj3d66-810003-8-584.lm',
+              'res/LayaScene_0917/Conventional/Assets/lipin-Obj3d66-810003-11-365.lm',
+              'res/LayaScene_0917/Conventional/Assets/lipin-Obj3d66-810003-12-572.lm',
+              'res/LayaScene_0917/Conventional/3.ls',
               ...Object.values(this.bannerImages),
               ...panCarConfig[0].list
           ];
@@ -334,7 +346,7 @@
       }
       onPreLoadFinish() {
           this.emit('onComplete');
-          this._scene = Laya.stage.addChild(Laya.Loader.getRes('res/LayaScene_3/Conventional/3.ls'));
+          this._scene = Laya.stage.addChild(Laya.Loader.getRes('res/LayaScene_0917/Conventional/3.ls'));
           Laya.stage.setChildIndex(this._scene, 0);
           this.cars = [
               this._scene.getChildByName('car'),
@@ -352,10 +364,6 @@
           this.createCamera();
           this.createCharacter();
           this.createCoupon();
-          this.emit('init', {
-              disableCouponButton: this.disableCouponButton.bind(this),
-              enableCouponButton: this.enableCouponButton.bind(this),
-          });
           Laya.timer.frameLoop(1, this, () => {
               for (let index = 0; index < this.cars.length; index++) {
                   const car = this.cars[index];
@@ -403,7 +411,11 @@
               if (outPos.z < 1) {
                   const posX = outPos.x - coupon.getBounds().width / 2;
                   const posY = outPos.y - coupon.getBounds().height * 3;
-                  if (index === 0) {
+                  if (index !== 0) {
+                      this.spinCars[0].hideColorPick();
+                  }
+                  else {
+                      this.spinCars[0].showColorPick();
                   }
                   coupon.pos(posX, posY);
                   coupon.scaleX = coupon.scaleY = (outPos.z + 2) / Laya.Browser.window.devicePixelRatio;
@@ -419,7 +431,30 @@
           directionLight.color = new Laya.Vector3(1, 1, 1);
           directionLight.transform.rotate(new Laya.Vector3(-3.14 / 3, 0, 0));
       }
-      onMouseDown() { }
+      onMouseDown() {
+          try {
+              this.point.x = Laya.MouseManager.instance.mouseX;
+              this.point.y = Laya.MouseManager.instance.mouseY;
+              this.camera.viewportPointToRay(this.point, this._ray);
+              this._scene.physicsSimulation.rayCast(this._ray, this._outHitResult);
+              if (this._outHitResult.succeeded) {
+                  const colliderName = this._outHitResult.collider.owner.name;
+                  console.log({ colliderName });
+                  this.spinCars.forEach(spinCar => {
+                      if (spinCar.car.name === colliderName) {
+                          spinCar.isMouseDown = true;
+                          spinCar.startX = Laya.stage.mouseX;
+                      }
+                  });
+                  if (colliderName === 'pengzhuang') {
+                      this.emit('onTurntableClick');
+                  }
+              }
+          }
+          catch (error) {
+              console.log(error);
+          }
+      }
   }
 
   class GameConfig {

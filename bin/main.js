@@ -1,21 +1,53 @@
 window.__hallSceneConfig = {
   /**
    * 场景初始化回调
-   * @param {function} disableCouponButton 禁用优惠券按钮
-   * @param {function} enableCouponButton 启用优惠券按钮
+   * @param {function} config.disableCouponButton 禁用优惠券按钮，必传 index 参数
+   * @param {function} config.enableCouponButton 启用优惠券按钮，必传 index 参数
    * 
    */
   init: function ({ disableCouponButton, enableCouponButton }) {
-
+    // 禁用第 1 个优惠券
+    disableCouponButton(1)
   },
-  onProgress: onProgress, // loading 进程
-  onComplete: onComplete, // loading 结束
+
+  /**
+   * loading 进程
+   */
+  onProgress: onProgress,
+
+  /**
+   * loading 结束
+   */
+  onComplete: onComplete,
+
+  /**
+   * 优惠券点击
+   * @param {object} config
+   * @param {number} config.index 优惠券索引
+   * @param {function} config.disableCouponButton 禁用优惠券按钮，必传 index 参数
+   * @param {function} config.enableCouponButton 启用优惠券按钮，必传 index 参数
+   * @param {boolean} config.couponButtonIsDisabled 优惠券按钮是否被禁用
+  */
   onCouponClick: function ({ index, disableCouponButton, enableCouponButton, couponButtonIsDisabled }) {
     if (!couponButtonIsDisabled) {
       alert(`你点击了第${index}个优惠券`)
-      disableCouponButton()
+      disableCouponButton(index)
     }
   },
+
+  /**
+   * 转盘点击
+   */
+  onTurntableClick: function () {
+    alert('你点击了转盘')
+  },
+
+  /**
+   * 优惠券配置
+   * @type {number} star 星星数
+   * @type {string} title 标题
+   * @type {car} car 车型名字
+   */
   coupon: [
     {
       star: 3,
