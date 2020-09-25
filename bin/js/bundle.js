@@ -17,7 +17,6 @@
           this.colorItemActivedBorderColor = '#59b7ff';
       }
       onEnable() {
-          console.log(123, this.owner.name);
           if (this.owner.name === 'car') {
               this.panoCars = panoCarConfig[0];
               this.carUrls = this.panoCars[0].list;
@@ -122,7 +121,6 @@
           }));
       }
       setTexture() {
-          console.log('setTexture', this.carUrls[this.spinIdx]);
           const mater = new Laya.BlinnPhongMaterial();
           mater.renderMode = Laya.BlinnPhongMaterial.RENDERMODE_TRANSPARENT;
           const texture = Laya.Loader.getRes(this.carUrls[this.spinIdx]);
@@ -130,7 +128,6 @@
           this.car.meshRenderer.material = mater;
       }
       spin(reverse = false) {
-          console.log(666, this.owner.name, this.carUrls);
           reverse ? this.spinIdx-- : this.spinIdx++;
           if (this.spinIdx < 0) {
               this.spinIdx += this.carUrls.length;
