@@ -255,7 +255,7 @@ export default class GameUI extends Laya.Scene {
       this.camera.viewport.project(car.transform.position, this.camera.projectionViewMatrix, outPos)
       if (outPos.z < 1) {
         const posX = outPos.x - coupon.getBounds().width / 2
-        const posY = outPos.y - coupon.getBounds().height * 3
+        const posY = outPos.y - coupon.getBounds().height * (index === 0 ? 3 : 2.5)
         if (index !== 0) {
           this.spinCars[0].hideColorPick()
         } else {
