@@ -23,7 +23,7 @@
 		"textures":[
 			{
 				"name":"albedoTexture",
-				"path":"car2 (2).png",
+				"path":"car.png",
 				"constructParams":[
 					1024,
 					1024,

@@ -8210,7 +8210,7 @@
 									"enableRender":true,
 									"materials":[
 										{
-											"path":"Assets/baoxiang.lmat"
+											"path":"Assets/Materials/yellow_B.lmat"
 										}
 									]
 								},
@@ -8245,7 +8245,7 @@
 									"enableRender":true,
 									"materials":[
 										{
-											"path":"Assets/baoxiang.lmat"
+											"path":"Assets/Materials/yellow_B.lmat"
 										}
 									]
 								},
@@ -8280,7 +8280,7 @@
 									"enableRender":true,
 									"materials":[
 										{
-											"path":"Assets/baoxiang.lmat"
+											"path":"Assets/Materials/yellow_B.lmat"
 										}
 									]
 								},
@@ -8315,7 +8315,7 @@
 									"enableRender":true,
 									"materials":[
 										{
-											"path":"Assets/baoxiang.lmat"
+											"path":"Assets/Materials/yellow_B.lmat"
 										}
 									]
 								},
@@ -8350,7 +8350,7 @@
 									"enableRender":true,
 									"materials":[
 										{
-											"path":"Assets/baoxiang.lmat"
+											"path":"Assets/Materials/yellow_B.lmat"
 										}
 									]
 								},
@@ -8385,7 +8385,7 @@
 									"enableRender":true,
 									"materials":[
 										{
-											"path":"Assets/baoxiang.lmat"
+											"path":"Assets/Materials/red_F.lmat"
 										}
 									]
 								},
@@ -8420,7 +8420,7 @@
 									"enableRender":true,
 									"materials":[
 										{
-											"path":"Assets/baoxiang.lmat"
+											"path":"Assets/Materials/yellow_B.lmat"
 										}
 									]
 								},
@@ -8455,7 +8455,7 @@
 									"enableRender":true,
 									"materials":[
 										{
-											"path":"Assets/baoxiang.lmat"
+											"path":"Assets/Materials/yellow_B.lmat"
 										}
 									]
 								},
@@ -8490,7 +8490,7 @@
 									"enableRender":true,
 									"materials":[
 										{
-											"path":"Assets/baoxiang.lmat"
+											"path":"Assets/Materials/yellow_B.lmat"
 										}
 									]
 								},
@@ -8525,7 +8525,7 @@
 									"enableRender":true,
 									"materials":[
 										{
-											"path":"Assets/baoxiang.lmat"
+											"path":"Assets/Materials/yellow_B.lmat"
 										}
 									]
 								},
@@ -8560,7 +8560,7 @@
 									"enableRender":true,
 									"materials":[
 										{
-											"path":"Assets/baoxiang.lmat"
+											"path":"Assets/Materials/yellow_B.lmat"
 										}
 									]
 								},
@@ -8624,7 +8624,7 @@
 									"enableRender":true,
 									"materials":[
 										{
-											"path":"Assets/baoxiang.lmat"
+											"path":"Assets/Materials/yellow_B.lmat"
 										}
 									]
 								},
@@ -8659,7 +8659,7 @@
 									"enableRender":true,
 									"materials":[
 										{
-											"path":"Assets/baoxiang.lmat"
+											"path":"Assets/Materials/yellow_B.lmat"
 										}
 									]
 								},
@@ -8694,7 +8694,7 @@
 									"enableRender":true,
 									"materials":[
 										{
-											"path":"Assets/baoxiang.lmat"
+											"path":"Assets/Materials/yellow_B.lmat"
 										}
 									]
 								},
@@ -8729,7 +8729,7 @@
 									"enableRender":true,
 									"materials":[
 										{
-											"path":"Assets/baoxiang.lmat"
+											"path":"Assets/Materials/yellow_B.lmat"
 										}
 									]
 								},
@@ -8764,7 +8764,7 @@
 									"enableRender":true,
 									"materials":[
 										{
-											"path":"Assets/baoxiang.lmat"
+											"path":"Assets/Materials/yellow_B.lmat"
 										}
 									]
 								},
@@ -8799,7 +8799,7 @@
 									"enableRender":true,
 									"materials":[
 										{
-											"path":"Assets/baoxiang.lmat"
+											"path":"Assets/Materials/red_F.lmat"
 										}
 									]
 								},
@@ -8834,7 +8834,7 @@
 									"enableRender":true,
 									"materials":[
 										{
-											"path":"Assets/baoxiang.lmat"
+											"path":"Assets/Materials/yellow_B.lmat"
 										}
 									]
 								},
@@ -8869,7 +8869,7 @@
 									"enableRender":true,
 									"materials":[
 										{
-											"path":"Assets/baoxiang.lmat"
+											"path":"Assets/Materials/yellow_B.lmat"
 										}
 									]
 								},
@@ -8904,7 +8904,7 @@
 									"enableRender":true,
 									"materials":[
 										{
-											"path":"Assets/baoxiang.lmat"
+											"path":"Assets/Materials/yellow_B.lmat"
 										}
 									]
 								},
@@ -8939,7 +8939,7 @@
 									"enableRender":true,
 									"materials":[
 										{
-											"path":"Assets/baoxiang.lmat"
+											"path":"Assets/Materials/yellow_B.lmat"
 										}
 									]
 								},
@@ -8974,7 +8974,7 @@
 									"enableRender":true,
 									"materials":[
 										{
-											"path":"Assets/baoxiang.lmat"
+											"path":"Assets/Materials/yellow_B.lmat"
 										}
 									]
 								},
@@ -10026,7 +10026,7 @@
 					"enableRender":true,
 					"materials":[
 						{
-							"path":"Assets/car.lmat"
+							"path":"Assets/car2.lmat"
 						}
 					]
 				},
@@ -10084,7 +10084,7 @@
 					"enableRender":true,
 					"materials":[
 						{
-							"path":"Assets/car.lmat"
+							"path":"Assets/car3.lmat"
 						}
 					]
 				},
@@ -10142,7 +10142,7 @@
 					"enableRender":true,
 					"materials":[
 						{
-							"path":"Assets/car.lmat"
+							"path":"Assets/car4.lmat"
 						}
 					]
 				},

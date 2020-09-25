@@ -136,7 +136,7 @@ export default class GameUI extends Laya.Scene {
 
   preloadRes() {
     var resource = [
-      'res/LayaScene_neiguan_0924_1/Conventional/3.ls',
+      'res/LayaScene_neiguan_0925_1/Conventional/3.ls',
       ...Object.values(this.bannerImages),
       ...panoCarConfig[0][0].list,
       ...panoCarConfig.slice(1).flat(),
@@ -165,7 +165,7 @@ export default class GameUI extends Laya.Scene {
     this.emit('onComplete')
 
     // 主场景
-    this._scene = Laya.stage.addChild(Laya.Loader.getRes('res/LayaScene_neiguan_0924_1/Conventional/3.ls')) as Laya.Scene3D
+    this._scene = Laya.stage.addChild(Laya.Loader.getRes('res/LayaScene_neiguan_0925_1/Conventional/3.ls')) as Laya.Scene3D
     Laya.stage.setChildIndex(this._scene, 0)
 
     this.cars = [

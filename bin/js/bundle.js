@@ -327,7 +327,7 @@
       }
       preloadRes() {
           var resource = [
-              'res/LayaScene_neiguan_0924_1/Conventional/3.ls',
+              'res/LayaScene_neiguan_0925_1/Conventional/3.ls',
               ...Object.values(this.bannerImages),
               ...panoCarConfig$1[0][0].list,
               ...panoCarConfig$1.slice(1).flat(),
@@ -351,7 +351,7 @@
       }
       onPreLoadFinish() {
           this.emit('onComplete');
-          this._scene = Laya.stage.addChild(Laya.Loader.getRes('res/LayaScene_neiguan_0924_1/Conventional/3.ls'));
+          this._scene = Laya.stage.addChild(Laya.Loader.getRes('res/LayaScene_neiguan_0925_1/Conventional/3.ls'));
           Laya.stage.setChildIndex(this._scene, 0);
           this.cars = [
               this._scene.getChildByName('car'),
