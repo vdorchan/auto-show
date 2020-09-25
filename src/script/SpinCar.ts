@@ -1,4 +1,5 @@
-import panCarConfig from './panoCarConfig'
+// import panCarConfig from './panoCarConfig'
+const panoCarConfig = window.__hallSceneConfig.panoCarConfig
 
 export default class SpinCar extends Laya.Script3D {
   public car: Laya.MeshSprite3D
@@ -7,7 +8,7 @@ export default class SpinCar extends Laya.Script3D {
   public spinIdx: number = 0
   public startX: number = null
   public colorPick: Laya.Sprite
-  public panoCars: { color: string; list: string[] }[]
+  public panoCars: { color?: string; list: string[] }[]
   public colorIdx: number = 0
   public colorItemList: laya.display.cmd.DrawCircleCmd[] = []
   public circleRadius: number = 40
@@ -19,16 +20,37 @@ export default class SpinCar extends Laya.Script3D {
   private colorItemActivedBorderColor: string = '#59b7ff'
 
   onEnable(): void {
-    this.panoCars = panCarConfig
-    this.carUrls = this.panoCars[0].list
+    // 从中间开始顺时针分别是 car、car2、car2 (1)、car2 (2)
+    if (this.owner.name === 'car') {
+      this.panoCars = panoCarConfig[0]
+      this.carUrls = this.panoCars[0].list
+    } else {
+      switch (this.owner.name) {
+        case 'car':
+          this.panoCars = panoCarConfig[0]
+          this.carUrls = this.panoCars[0].list
+        case 'car2':
+          this.carUrls = panoCarConfig[1]
+          break
+        case 'car2 (1)':
+          this.carUrls = panoCarConfig[2]
+          break
+        case 'car2 (2)':
+          this.carUrls = panoCarConfig[3]
+          break
+      }
+    }
+
     this.car = this.owner as Laya.MeshSprite3D
-    if (this.car['showColorPick']) {
+    if (this.car['showColorPick'] && this.panoCars) {
       this.createColorPick()
       this.onColorPick(0)
     }
 
     Laya.stage.on(Laya.Event.MOUSE_MOVE, this, this.handleMouseMove)
     Laya.stage.on(Laya.Event.MOUSE_UP, this, this.handleMouseUp)
+
+    this.setTexture()
   }
 
   createColorPick() {

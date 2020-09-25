@@ -1,7 +1,8 @@
 import Controller from './Controller'
 import SpinCar from './SpinCar'
 import CameraRotate from './CameraRotate'
-import panCarConfig from './panoCarConfig'
+
+const panoCarConfig = window.__hallSceneConfig.panoCarConfig
 
 export default class GameUI extends Laya.Scene {
   private _scene: Laya.Scene3D
@@ -135,23 +136,10 @@ export default class GameUI extends Laya.Scene {
 
   preloadRes() {
     var resource = [
-      'res/LayaScene_neiguan_0924_1/Conventional/Assets/lipin-Obj3d66-810003-5-510.lm',
-      'res/LayaScene_neiguan_0924_1/Conventional/Assets/lipin-Obj3d66-810003-7-647.lm',
-      'res/LayaScene_neiguan_0924_1/Conventional/Assets/lipin-Obj3d66-810003-4-160.lm',
-      'res/LayaScene_neiguan_0924_1/Conventional/Assets/lipin-Obj3d66-810003-9-923.lm',
-      'res/LayaScene_neiguan_0924_1/Conventional/Assets/lipin-Obj3d66-810003-3-54.lm',
-      'res/LayaScene_neiguan_0924_1/Conventional/Assets/lipin-Obj3d66-810003-20-205.lm',
-      'res/LayaScene_neiguan_0924_1/Conventional/Assets/canary_wharf_2k.png',
-      'res/LayaScene_neiguan_0924_1/Conventional/Assets/lipin-Obj3d66-810003-21-992.lm',
-      'res/LayaScene_neiguan_0924_1/Conventional/Assets/lipin-Obj3d66-810003-18-821.lm',
-      'res/LayaScene_neiguan_0924_1/Conventional/Assets/lipin-Obj3d66-810003-2-694.lm',
-      'res/LayaScene_neiguan_0924_1/Conventional/Assets/lipin-Obj3d66-810003-6-1.lm',
-      'res/LayaScene_neiguan_0924_1/Conventional/Assets/lipin-Obj3d66-810003-8-584.lm',
-      'res/LayaScene_neiguan_0924_1/Conventional/Assets/lipin-Obj3d66-810003-11-365.lm',
-      'res/LayaScene_neiguan_0924_1/Conventional/Assets/lipin-Obj3d66-810003-12-572.lm',
       'res/LayaScene_neiguan_0924_1/Conventional/3.ls',
       ...Object.values(this.bannerImages),
-      ...panCarConfig[0].list
+      ...panoCarConfig[0][0].list,
+      ...panoCarConfig.slice(1).flat(),
     ]
     Laya.loader.create(resource, Laya.Handler.create(this, this.onPreLoadFinish), Laya.Handler.create(this, this.onProgress))
   }

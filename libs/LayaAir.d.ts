@@ -53168,5 +53168,11 @@ interface Window {
 			car: string
 		}[],
 		bannerImages: {[prop: string]: string}
+		panoCarConfig: [
+			{ color: string, list: string[] }[],
+			string[],
+			string[],
+			string[],
+		]
 	}
 }
